@@ -1,0 +1,221 @@
+﻿<Activity mc:Ignorable="sads sap sap2010" x:Class="ActivityBuilder" mva:VisualBasic.Settings="{x:Null}" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:eac="clr-namespace:ESRI.ArcGIS.Client;assembly=ESRI.ArcGIS.Client"
+ xmlns:eacg="clr-namespace:ESRI.ArcGIS.Client.Geometry;assembly=ESRI.ArcGIS.Client"
+ xmlns:eact="clr-namespace:ESRI.ArcGIS.Client.Tasks;assembly=ESRI.ArcGIS.Client"
+ xmlns:esri="http://schemas.esri.com/arcgis/client/2009"
+ xmlns:gce="clr-namespace:Geocortex.Core.Extensions;assembly=Geocortex.Core"
+ xmlns:gcx="http://apis.geocortex.com/2009"
+ xmlns:gfc="clr-namespace:Geocortex.Forms.Client;assembly=Geocortex.EssentialsWpfApi"
+ xmlns:gfci="clr-namespace:Geocortex.Forms.Client.Items;assembly=Geocortex.EssentialsWpfApi"
+ xmlns:gr="clr-namespace:Geocortex.Reporting;assembly=Geocortex.Reporting"
+ xmlns:gwa="clr-namespace:Geocortex.Workflow.Activities;assembly=Geocortex.Workflow"
+ xmlns:gwa1="clr-namespace:Geocortex.Workflow.Activities;assembly=Geocortex.Workflow.Activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:s="clr-namespace:System;assembly=System.Core"
+ xmlns:s1="clr-namespace:System;assembly=System"
+ xmlns:s2="clr-namespace:System;assembly=mscorlib"
+ xmlns:sa="clr-namespace:System.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:sc="clr-namespace:System.Collections;assembly=mscorlib"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:sl="clr-namespace:System.Linq;assembly=System.Core"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>ESRI.ArcGIS.Client</x:String>
+      <x:String>ESRI.ArcGIS.Client.Geometry</x:String>
+      <x:String>ESRI.ArcGIS.Client.Tasks</x:String>
+      <x:String>Geocortex.Core.Extensions</x:String>
+      <x:String>Geocortex.Workflow.Activities</x:String>
+      <x:String>Geocortex.Forms.Client</x:String>
+      <x:String>Geocortex.Forms.Client.Items</x:String>
+      <x:String>Geocortex.Reporting</x:String>
+      <x:String>System</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.Collections</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>ESRI.ArcGIS.Client</AssemblyReference>
+      <AssemblyReference>Geocortex.Core</AssemblyReference>
+      <AssemblyReference>Geocortex.Workflow</AssemblyReference>
+      <AssemblyReference>Geocortex.EssentialsWpfApi</AssemblyReference>
+      <AssemblyReference>Geocortex.Reporting</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Reactive.Core</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_1" mva:VisualBasic.Settings="Assembly references and imported namespaces serialized as XML namespaces">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="RCE_Items" />
+      <Variable x:TypeArguments="sd:DataTable" Name="costItemsDataTable" />
+      <Variable x:TypeArguments="sc:IList" Name="convertedCostItems" />
+      <Variable x:TypeArguments="scg:IEnumerable(sd:DataRow)" Name="costItemRows" />
+      <Variable x:TypeArguments="x:String" Name="variable1" />
+    </Sequence.Variables>
+    <gwa1:SqlQuery CommandText="select * from RehabilitationCostItems" ConnectionString="Data Source=AAML0237;Initial Catalog=DRE_RCE_POC;Integrated Security=False;User Id=DRE_RCE; Password=P@ssword1" sap2010:WorkflowViewState.IdRef="SqlQuery_1" ProviderName="System.Data.SqlClient" Results="[costItemsDataTable]" />
+    <Assign sap2010:WorkflowViewState.IdRef="Assign_2">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[costItemsDataTable.TableName]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">CostItemsTable</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ForEach x:TypeArguments="sd:DataRow" DisplayName="ForEach&lt;DataRow&gt;" sap2010:WorkflowViewState.IdRef="ForEach`1_5" Values="[costItemsDataTable.Select()]">
+      <ActivityAction x:TypeArguments="sd:DataRow">
+        <ActivityAction.Argument>
+          <DelegateInArgument x:TypeArguments="sd:DataRow" Name="costItem" />
+        </ActivityAction.Argument>
+        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="x:String" Name="currentCostItemType" />
+          </Sequence.Variables>
+          <If Condition="[costItem.Item(&quot;FeatureType&quot;) Is Nothing]" sap2010:WorkflowViewState.IdRef="If_1">
+            <If.Then>
+              <gwa1:DisplayForm FormDefinition="&lt;FormDefinition xmlns=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client&quot; xmlns:i=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;&lt;ContainerFormItem xmlns:a=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items&quot;&gt;&lt;a:ArgumentName/&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID&gt;Group1&lt;/a:ItemID&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;/&gt;&lt;a:Description&gt;Item Costs&lt;/a:Description&gt;&lt;a:FormItems&gt;&lt;a:FormItem i:type=&quot;a:TextBoxFormItem&quot;&gt;&lt;a:ArgumentName&gt;txtUnits&lt;/a:ArgumentName&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID&gt;TextBox1&lt;/a:ItemID&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;&gt;&lt;b:ValidationItem i:type=&quot;b:NumericRangeValidationItem&quot;&gt;&lt;b:Message&gt;Please enter a positive value for number of  units&lt;/b:Message&gt;&lt;b:MaximumValue&gt;100000&lt;/b:MaximumValue&gt;&lt;b:MinimumValue&gt;1&lt;/b:MinimumValue&gt;&lt;/b:ValidationItem&gt;&lt;/a:ValidationItems&gt;&lt;a:DefaultText/&gt;&lt;a:InputScope&gt;Default&lt;/a:InputScope&gt;&lt;a:Label&gt;&lt;a:ArgumentName/&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID/&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;/&gt;&lt;a:LabelForItemID&gt;TextBox1&lt;/a:LabelForItemID&gt;&lt;a:Text&gt;Units :&lt;/a:Text&gt;&lt;/a:Label&gt;&lt;a:ReadOnly&gt;false&lt;/a:ReadOnly&gt;&lt;a:TextboxWidth&gt;200&lt;/a:TextboxWidth&gt;&lt;/a:FormItem&gt;&lt;a:FormItem i:type=&quot;a:TextBoxFormItem&quot;&gt;&lt;a:ArgumentName&gt;txtUnitPrice&lt;/a:ArgumentName&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID&gt;TextBox2&lt;/a:ItemID&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;&gt;&lt;b:ValidationItem i:type=&quot;b:NumericRangeValidationItem&quot;&gt;&lt;b:Message&gt;Please enter a price for each unit&lt;/b:Message&gt;&lt;b:MaximumValue&gt;100000&lt;/b:MaximumValue&gt;&lt;b:MinimumValue&gt;0&lt;/b:MinimumValue&gt;&lt;/b:ValidationItem&gt;&lt;/a:ValidationItems&gt;&lt;a:DefaultText/&gt;&lt;a:InputScope&gt;Default&lt;/a:InputScope&gt;&lt;a:Label&gt;&lt;a:ArgumentName/&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID/&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;/&gt;&lt;a:LabelForItemID&gt;TextBox2&lt;/a:LabelForItemID&gt;&lt;a:Text&gt;Unit Price :&lt;/a:Text&gt;&lt;/a:Label&gt;&lt;a:ReadOnly&gt;false&lt;/a:ReadOnly&gt;&lt;a:TextboxWidth&gt;200&lt;/a:TextboxWidth&gt;&lt;/a:FormItem&gt;&lt;/a:FormItems&gt;&lt;a:MaxWidth&gt;INF&lt;/a:MaxWidth&gt;&lt;a:Orientation&gt;Vertical&lt;/a:Orientation&gt;&lt;a:VisibleControlID i:nil=&quot;true&quot;/&gt;&lt;a:VisibleControlValue i:nil=&quot;true&quot;/&gt;&lt;/ContainerFormItem&gt;&lt;KnownTypes xmlns:a=&quot;http://schemas.microsoft.com/2003/10/Serialization/Arrays&quot;&gt;&lt;a:string&gt;Geocortex.Forms.Client.Items.ContainerFormItem&lt;/a:string&gt;&lt;a:string&gt;Geocortex.Forms.Client.Items.TextBoxFormItem&lt;/a:string&gt;&lt;a:string&gt;Geocortex.Forms.Client.Items.Validation.NumericRangeValidationItem&lt;/a:string&gt;&lt;/KnownTypes&gt;&lt;MaxHeight&gt;800&lt;/MaxHeight&gt;&lt;MaxWidth&gt;400&lt;/MaxWidth&gt;&lt;Title&gt;Non spatial activity&lt;/Title&gt;&lt;Version&gt;1.1&lt;/Version&gt;&lt;/FormDefinition&gt;" sap2010:WorkflowViewState.IdRef="DisplayForm_1">
+                <gwa1:DisplayForm.Body>
+                  <ActivityAction x:TypeArguments="gcx:FormDefinition">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="gcx:FormDefinition" Name="form" />
+                    </ActivityAction.Argument>
+                    <Sequence DisplayName="RuntimeModifications" sap2010:WorkflowViewState.IdRef="Sequence_2" />
+                  </ActivityAction>
+                </gwa1:DisplayForm.Body>
+                <gwa1:DisplayForm.Buttons>
+                  <gcx:FormButton CausesValidation="True" IsDefault="False" Label="OK" Value="Value" />
+                  <gcx:FormButton CausesValidation="False" IsDefault="False" Label="Cancel" Value="Value" />
+                </gwa1:DisplayForm.Buttons>
+                <gwa1:DisplayForm.FormOutArguments>
+                  <gwa:ArgumentWrapper x:TypeArguments="OutArgument" IsRequired="False" Name="txtUnits">
+                    <gwa:ArgumentWrapper.Argument>
+                      <OutArgument x:TypeArguments="x:String" />
+                    </gwa:ArgumentWrapper.Argument>
+                  </gwa:ArgumentWrapper>
+                  <gwa:ArgumentWrapper x:TypeArguments="OutArgument" IsRequired="False" Name="txtUnitPrice">
+                    <gwa:ArgumentWrapper.Argument>
+                      <OutArgument x:TypeArguments="x:String" />
+                    </gwa:ArgumentWrapper.Argument>
+                  </gwa:ArgumentWrapper>
+                </gwa1:DisplayForm.FormOutArguments>
+              </gwa1:DisplayForm>
+            </If.Then>
+            <If.Else>
+              <Sequence sap2010:WorkflowViewState.IdRef="Sequence_3">
+                <Sequence.Variables>
+                  <Variable x:TypeArguments="esri:Geometry" Name="lastCreatedPointGeometry" />
+                  <Variable x:TypeArguments="esri:Geometry" Name="lastCreatedPolylineGeometry" />
+                  <Variable x:TypeArguments="esri:Geometry" Name="lastCreatedPolygoneGeometry" />
+                </Sequence.Variables>
+                <Assign sap2010:WorkflowViewState.IdRef="Assign_1">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:String">[currentCostItemType]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:String">[costItem.Item("FeatureType").ToString()]</InArgument>
+                  </Assign.Value>
+                </Assign>
+                <Switch x:TypeArguments="x:String" Expression="[currentCostItemType]" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+                  <gwa1:DisplayCaptureGeometry AutoSubmit="{x:Null}" CaptureTypes="{x:Null}" DefaultCaptureType="{x:Null}" GraphicsLayerName="{x:Null}" x:Key="&quot;Point&quot;" DefaultCaptureTypePlaceholder="MapPoint" GeometryRequired="True" sap2010:WorkflowViewState.IdRef="DisplayCaptureGeometry_1" InputGeometry="[lastCreatedPointGeometry]" Message="Draw points to specify features for cost calculation" RequiredMessage="Draw points to determine costs" Result="[lastCreatedPointGeometry]" ShowCapturedGeometry="True" ShowCapturedMessage="True" Title="Cost Estimate" WorkflowContainerName="SpatialCostItemsContainer">
+                    <gwa1:DisplayCaptureGeometry.CaptureTypesPlaceholder>
+                      <scg:List x:TypeArguments="gwa1:GeometryCaptureType" Capacity="4">
+                        <gwa1:GeometryCaptureType>MapPoint</gwa1:GeometryCaptureType>
+                      </scg:List>
+                    </gwa1:DisplayCaptureGeometry.CaptureTypesPlaceholder>
+                  </gwa1:DisplayCaptureGeometry>
+                  <gwa1:DisplayCaptureGeometry AutoSubmit="{x:Null}" CaptureTypes="{x:Null}" DefaultCaptureType="{x:Null}" GraphicsLayerName="{x:Null}" x:Key="&quot;Polyline&quot;" DefaultCaptureTypePlaceholder="Polyline" GeometryRequired="True" sap2010:WorkflowViewState.IdRef="DisplayCaptureGeometry_2" InputGeometry="[lastCreatedPolygoneGeometry]" Message="Draw lines to specify features for cost calculation" RequiredMessage="Draw lines to determine costs" Result="[lastCreatedPolylineGeometry]" ShowCapturedGeometry="True" ShowCapturedMessage="True" Title="Cost Estimate" WorkflowContainerName="SpatialCostItemsContainer">
+                    <gwa1:DisplayCaptureGeometry.CaptureTypesPlaceholder>
+                      <scg:List x:TypeArguments="gwa1:GeometryCaptureType" Capacity="4">
+                        <gwa1:GeometryCaptureType>Polyline</gwa1:GeometryCaptureType>
+                      </scg:List>
+                    </gwa1:DisplayCaptureGeometry.CaptureTypesPlaceholder>
+                  </gwa1:DisplayCaptureGeometry>
+                  <gwa1:DisplayCaptureGeometry AutoSubmit="{x:Null}" CaptureTypes="{x:Null}" DefaultCaptureType="{x:Null}" GraphicsLayerName="{x:Null}" x:Key="&quot;Polygon&quot;" DefaultCaptureTypePlaceholder="Polygon" GeometryRequired="True" sap2010:WorkflowViewState.IdRef="DisplayCaptureGeometry_3" InputGeometry="[lastCreatedPolygoneGeometry]" Message="Draw polygons to specify features for cost calculation" RequiredMessage="Draw polygons to determine costs" Result="[lastCreatedPolygoneGeometry]" ShowCapturedGeometry="True" ShowCapturedMessage="True" Title="Cost Estimate" WorkflowContainerName="SpatialCostItemsContainer">
+                    <gwa1:DisplayCaptureGeometry.CaptureTypesPlaceholder>
+                      <scg:List x:TypeArguments="gwa1:GeometryCaptureType" Capacity="4">
+                        <gwa1:GeometryCaptureType>Polygon</gwa1:GeometryCaptureType>
+                      </scg:List>
+                    </gwa1:DisplayCaptureGeometry.CaptureTypesPlaceholder>
+                  </gwa1:DisplayCaptureGeometry>
+                </Switch>
+              </Sequence>
+            </If.Else>
+          </If>
+        </Sequence>
+      </ActivityAction>
+    </ForEach>
+    <sads:DebugSymbol.Symbol>d3dDOlxQcm9ncmFtIEZpbGVzICh4ODYpXExhdGl0dWRlIEdlb2dyYXBoaWNzXEdlb2NvcnRleCBFc3NlbnRpYWxzXERlZmF1bHRcUkVTVCBFbGVtZW50c1xTaXRlc1xXb3JrZmxvd3NcRFJFX1JDRV9QT0MueGFtbDJNA7EBDgIBAVUFVb0CAgE5VgVdDgIBNl4FrwEPAgECVaQCVboCAgE6WzBbPgIBOFgxWE8CATdehQFepAECATVjCa0BFAIBA2cLrAEQAgEEZxlnTgIBBWkPggEiAgEyhQEPqgEaAgEGaTBpux0CATRvFW9xAgEziwERkgEaAgEukwERqQEaAgEHkAE8kAFlAgExjQE9jQFSAgEvkwE/kwFWAgEIlAETmgExAgEimwEToQExAgEWogETqAExAgEKlAHiApQBmAMCAS2UAdEElAHsBAIBLJQBgwSUAYkEAgErlAGeBJQBpAQCASqUAdEDlAHtAwIBKJQBqwSUAboEAgEnlAGpA5QByQMCASaUAe0BlAHzAQIBJZQBvQKUAdkCAgEjmwHoApsBnQMCASGbAdgEmwHzBAIBIJsBigSbAZAEAgEfmwGlBJsBqwQCAR6bAdUDmwH0AwIBHJsBsgSbAcEEAgEbmwGuA5sBzQMCARqbAfABmwH2AQIBGZsBwAKbAd8CAgEXogHmAqIBngMCARWiAdwEogH3BAIBFKIBjgSiAZQEAgETogGpBKIBrwQCARKiAdkDogH4AwIBEKIBtgSiAcUEAgEPogGvA6IB0QMCAQ6iAe4BogH0AQIBDaIBvgKiAd0CAgEL</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="SqlQuery_1" sap:VirtualizedContainerService.HintSize="903,136" />
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="903,60" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="DisplayForm_1" sap:VirtualizedContainerService.HintSize="328,561" />
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="476,60" />
+      <sap2010:ViewStateData Id="DisplayCaptureGeometry_1" sap:VirtualizedContainerService.HintSize="351,562" />
+      <sap2010:ViewStateData Id="DisplayCaptureGeometry_2" sap:VirtualizedContainerService.HintSize="351,562" />
+      <sap2010:ViewStateData Id="DisplayCaptureGeometry_3" sap:VirtualizedContainerService.HintSize="351,562" />
+      <sap2010:ViewStateData Id="Switch`1_1" sap:VirtualizedContainerService.HintSize="476,790" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="498,1014">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="851,1162" />
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="873,1286">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_5" sap:VirtualizedContainerService.HintSize="903,1434" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="925,1834">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ActivityBuilder_1" sap:VirtualizedContainerService.HintSize="965,1914" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>
