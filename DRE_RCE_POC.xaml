@@ -175,11 +175,10 @@
                     <gwa1:Alert sap2010:WorkflowViewState.IdRef="Alert_2" Text="[currentCostItemType]" Title="Default" />
                   </Switch.Default>
                   <Sequence x:Key="Point" sap2010:WorkflowViewState.IdRef="Sequence_6">
-                    <WriteLine sap2010:WorkflowViewState.IdRef="WriteLine_4" Text="[&quot;Should be here for points&quot; &amp; currentCostItemType]" />
-                    <gwa1:DisplayCaptureGeometry AutoSubmit="{x:Null}" CaptureTypes="{x:Null}" DefaultCaptureType="{x:Null}" DefaultCaptureTypePlaceholder="{x:Null}" GraphicsLayerName="{x:Null}" GeometryRequired="True" sap2010:WorkflowViewState.IdRef="DisplayCaptureGeometry_1" Message="Draw points to specify features for cost calculation" RequiredMessage="Draw points to determine costs" Result="[lastCreatedPointGeometry]" ShowCapturedGeometry="True" ShowCapturedMessage="True" Title="Cost Estimate" WorkflowContainerName="SpatialCostItemsContainer">
+                    <gwa1:DisplayCaptureGeometry AutoSubmit="{x:Null}" CaptureTypes="{x:Null}" DefaultCaptureType="{x:Null}" GraphicsLayerName="{x:Null}" DefaultCaptureTypePlaceholder="MultiPoint" GeometryRequired="True" sap2010:WorkflowViewState.IdRef="DisplayCaptureGeometry_1" Message="Draw points to specify features for cost calculation" RequiredMessage="Draw points to determine costs" Result="[lastCreatedPointGeometry]" ShowCapturedGeometry="True" ShowCapturedMessage="True" Title="Cost Estimate" WorkflowContainerName="SpatialCostItemsContainer">
                       <gwa1:DisplayCaptureGeometry.CaptureTypesPlaceholder>
                         <scg:List x:TypeArguments="gwa1:GeometryCaptureType" Capacity="4">
-                          <gwa1:GeometryCaptureType>Extent</gwa1:GeometryCaptureType>
+                          <gwa1:GeometryCaptureType>MultiPoint</gwa1:GeometryCaptureType>
                         </scg:List>
                       </gwa1:DisplayCaptureGeometry.CaptureTypesPlaceholder>
                     </gwa1:DisplayCaptureGeometry>
@@ -205,7 +204,7 @@
         </Sequence>
       </ActivityAction>
     </ForEach>
-    <sads:DebugSymbol.Symbol>d3dDOlxQcm9ncmFtIEZpbGVzICh4ODYpXExhdGl0dWRlIEdlb2dyYXBoaWNzXEdlb2NvcnRleCBFc3NlbnRpYWxzXERlZmF1bHRcUkVTVCBFbGVtZW50c1xTaXRlc1xXb3JrZmxvd3NcRFJFX1JDRV9QT0MueGFtbEZPA9EBDgIBAVoFWr0CAgFQWwViDgIBTWMFY4ECAgFHZAVk+wECAUFlBc8BDwIBAlqkAlq6AgIBUWAwYD4CAU9dMV1PAgFOY39jmgECAUxj4wFj/gECAUtjWmNwAgFJYzBjTwIBSGR9ZJYBAgFGZN8BZPgBAgFFZFhkbgIBQ2QwZE0CAUJliAFlpwECAUBqCc0BFAIBA24LzAEQAgEEbhlubQIBBXAPnAEaAgE0nwEPygEaAgEGcRGbASQCATWlARGsARoCATCtARHJARoCAQdxMnG9HQIBP3cXiAEiAgE2qgE8qgFeAgEzpwE9pwFSAgExrQE/rQFWAgEIsQETugEeAgEiuwETwQExAgEYwgETyAExAgEOrwEVrwF6AgEKeBl/IgIBPIABGYcBIgIBN7IBFbIBmQECAS2zARW5ATMCASO7Aa4CuwHjAgIBIbsBngS7AbkEAgEguwHQA7sB1gMCAR+7AesDuwHxAwIBHrsBmwO7AboDAgEcuwH4A7sBhwQCARu7AfQCuwGTAwIBGrsB5AG7AeoBAgEZwgGsAsIB5AICARfCAaIEwgG9BAIBFsIB1APCAdoDAgEVwgHvA8IB9QMCARTCAZ8DwgG+AwIBEsIB/APCAYsEAgERwgH1AsIBlwMCARDCAeIBwgHoAQIBD68BUK8BZwIBDK8Bbq8BdwIBC31EfYYBAgE+ekV6fAIBPYUBQ4UBXQIBOoIBRIIBWgIBOLIBU7IBlgECAS6zAZ8CswHVAgIBLLMBjgSzAakEAgErswHAA7MBxgMCASqzAdsDswHhAwIBKbMBjgOzAaoDAgEnswHoA7MB9wMCASazAeYCswGGAwIBJbMB1QGzAdsBAgEk</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>d3dDOlxQcm9ncmFtIEZpbGVzICh4ODYpXExhdGl0dWRlIEdlb2dyYXBoaWNzXEdlb2NvcnRleCBFc3NlbnRpYWxzXERlZmF1bHRcUkVTVCBFbGVtZW50c1xTaXRlc1xXb3JrZmxvd3NcRFJFX1JDRV9QT0MueGFtbERPA9ABDgIBAVoFWr0CAgFNWwViDgIBSmMFY4ECAgFEZAVk+wECAT5lBc4BDwIBAlqkAlq6AgIBTmAwYD4CAUxdMV1PAgFLY39jmgECAUlj4wFj/gECAUhjWmNwAgFGYzBjTwIBRWR9ZJYBAgFDZN8BZPgBAgFCZFhkbgIBQGQwZE0CAT9liAFlpwECAT1qCcwBFAIBA24LywEQAgEEbhlubQIBBXAPnAEaAgExnwEPyQEaAgEGcRGbASQCATKlARGsARoCAS2tARHIARoCAQdxMnG9HQIBPHcXiAEiAgEzqgE8qgFeAgEwpwE9pwFSAgEurQE/rQFWAgEIsQETuQEeAgEiugETwAExAgEYwQETxwExAgEOrwEVrwF6AgEKeBl/IgIBOYABGYcBIgIBNLIBFbgBMwIBI7oBrgK6AeMCAgEhugGeBLoBuQQCASC6AdADugHWAwIBH7oB6wO6AfEDAgEeugGbA7oBugMCARy6AfgDugGHBAIBG7oB9AK6AZMDAgEaugHkAboB6gECARnBAawCwQHkAgIBF8EBogTBAb0EAgEWwQHUA8EB2gMCARXBAe8DwQH1AwIBFMEBnwPBAb4DAgESwQH8A8EBiwQCARHBAfUCwQGXAwIBEMEB4gHBAegBAgEPrwFQrwFnAgEMrwFurwF3AgELfUR9hgECATt6RXp8AgE6hQFDhQFdAgE3ggFEggFaAgE1sgGhArIB1wICASyyAZAEsgGrBAIBK7IBwgOyAcgDAgEqsgHdA7IB4wMCASmyAZADsgGsAwIBJ7IB6gOyAfkDAgEmsgHoArIBiAMCASWyAdcBsgHdAQIBJA==</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -232,9 +231,8 @@
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="476,60" />
       <sap2010:ViewStateData Id="Alert_2" sap:VirtualizedContainerService.HintSize="212,86" />
-      <sap2010:ViewStateData Id="WriteLine_4" sap:VirtualizedContainerService.HintSize="351,61" />
       <sap2010:ViewStateData Id="DisplayCaptureGeometry_1" sap:VirtualizedContainerService.HintSize="351,562" />
-      <sap2010:ViewStateData Id="Sequence_6" sap:VirtualizedContainerService.HintSize="200,51">
+      <sap2010:ViewStateData Id="Sequence_6" sap:VirtualizedContainerService.HintSize="373,686">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -244,15 +242,15 @@
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="DisplayCaptureGeometry_2" sap:VirtualizedContainerService.HintSize="351,562" />
       <sap2010:ViewStateData Id="DisplayCaptureGeometry_3" sap:VirtualizedContainerService.HintSize="351,562" />
-      <sap2010:ViewStateData Id="Switch`1_1" sap:VirtualizedContainerService.HintSize="476,790" />
-      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="498,1014">
+      <sap2010:ViewStateData Id="Switch`1_1" sap:VirtualizedContainerService.HintSize="476,288" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="498,512">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="873,1162">
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="873,833">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -260,22 +258,22 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="895,1286">
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="895,957">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ForEach`1_6" sap:VirtualizedContainerService.HintSize="925,1434" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="947,2186">
+      <sap2010:ViewStateData Id="ForEach`1_6" sap:VirtualizedContainerService.HintSize="925,1105" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="947,1857">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ActivityBuilder_1" sap:VirtualizedContainerService.HintSize="987,2266" />
+      <sap2010:ViewStateData Id="ActivityBuilder_1" sap:VirtualizedContainerService.HintSize="987,1937" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>
