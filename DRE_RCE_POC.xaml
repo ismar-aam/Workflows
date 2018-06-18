@@ -162,31 +162,36 @@
                   <Variable x:TypeArguments="esri:Geometry" Name="lastCreatedPolylineGeometry" />
                   <Variable x:TypeArguments="esri:Geometry" Name="lastCreatedPolygoneGeometry" />
                 </Sequence.Variables>
-                <WriteLine sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="[&quot;Feature Type value is spatial : &quot; &amp; costItem.Value.ToString()]" />
                 <Assign sap2010:WorkflowViewState.IdRef="Assign_1">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[currentCostItemType]</OutArgument>
                   </Assign.To>
                   <Assign.Value>
-                    <InArgument x:TypeArguments="x:String">[costItem.Value.ToString()]</InArgument>
+                    <InArgument x:TypeArguments="x:String">[costItem.Value.ToString().Trim()]</InArgument>
                   </Assign.Value>
                 </Assign>
                 <Switch x:TypeArguments="x:String" Expression="[currentCostItemType]" sap2010:WorkflowViewState.IdRef="Switch`1_1">
-                  <gwa1:DisplayCaptureGeometry AutoSubmit="{x:Null}" CaptureTypes="{x:Null}" DefaultCaptureType="{x:Null}" GraphicsLayerName="{x:Null}" x:Key="&quot;Point&quot;" DefaultCaptureTypePlaceholder="MapPoint" GeometryRequired="True" sap2010:WorkflowViewState.IdRef="DisplayCaptureGeometry_1" InputGeometry="[lastCreatedPointGeometry]" Message="Draw points to specify features for cost calculation" RequiredMessage="Draw points to determine costs" Result="[lastCreatedPointGeometry]" ShowCapturedGeometry="True" ShowCapturedMessage="True" Title="Cost Estimate" WorkflowContainerName="SpatialCostItemsContainer">
-                    <gwa1:DisplayCaptureGeometry.CaptureTypesPlaceholder>
-                      <scg:List x:TypeArguments="gwa1:GeometryCaptureType" Capacity="4">
-                        <gwa1:GeometryCaptureType>MapPoint</gwa1:GeometryCaptureType>
-                      </scg:List>
-                    </gwa1:DisplayCaptureGeometry.CaptureTypesPlaceholder>
-                  </gwa1:DisplayCaptureGeometry>
-                  <gwa1:DisplayCaptureGeometry AutoSubmit="{x:Null}" CaptureTypes="{x:Null}" DefaultCaptureType="{x:Null}" GraphicsLayerName="{x:Null}" x:Key="&quot;Polyline&quot;" DefaultCaptureTypePlaceholder="Polyline" GeometryRequired="True" sap2010:WorkflowViewState.IdRef="DisplayCaptureGeometry_2" InputGeometry="[lastCreatedPolygoneGeometry]" Message="Draw lines to specify features for cost calculation" RequiredMessage="Draw lines to determine costs" Result="[lastCreatedPolylineGeometry]" ShowCapturedGeometry="True" ShowCapturedMessage="True" Title="Cost Estimate" WorkflowContainerName="SpatialCostItemsContainer">
+                  <Switch.Default>
+                    <gwa1:Alert sap2010:WorkflowViewState.IdRef="Alert_2" Text="[currentCostItemType]" Title="Default" />
+                  </Switch.Default>
+                  <Sequence x:Key="Point" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                    <WriteLine sap2010:WorkflowViewState.IdRef="WriteLine_4" Text="[&quot;Should be here for points&quot; &amp; currentCostItemType]" />
+                    <gwa1:DisplayCaptureGeometry AutoSubmit="{x:Null}" CaptureTypes="{x:Null}" DefaultCaptureType="{x:Null}" DefaultCaptureTypePlaceholder="{x:Null}" GraphicsLayerName="{x:Null}" GeometryRequired="True" sap2010:WorkflowViewState.IdRef="DisplayCaptureGeometry_1" Message="Draw points to specify features for cost calculation" RequiredMessage="Draw points to determine costs" Result="[lastCreatedPointGeometry]" ShowCapturedGeometry="True" ShowCapturedMessage="True" Title="Cost Estimate" WorkflowContainerName="SpatialCostItemsContainer">
+                      <gwa1:DisplayCaptureGeometry.CaptureTypesPlaceholder>
+                        <scg:List x:TypeArguments="gwa1:GeometryCaptureType" Capacity="4">
+                          <gwa1:GeometryCaptureType>Extent</gwa1:GeometryCaptureType>
+                        </scg:List>
+                      </gwa1:DisplayCaptureGeometry.CaptureTypesPlaceholder>
+                    </gwa1:DisplayCaptureGeometry>
+                  </Sequence>
+                  <gwa1:DisplayCaptureGeometry AutoSubmit="{x:Null}" CaptureTypes="{x:Null}" DefaultCaptureType="{x:Null}" GraphicsLayerName="{x:Null}" x:Key="Polyline" DefaultCaptureTypePlaceholder="Polyline" GeometryRequired="True" sap2010:WorkflowViewState.IdRef="DisplayCaptureGeometry_2" Message="Draw lines to specify features for cost calculation" RequiredMessage="Draw lines to determine costs" Result="[lastCreatedPolylineGeometry]" ShowCapturedGeometry="True" ShowCapturedMessage="True" Title="Cost Estimate" WorkflowContainerName="SpatialCostItemsContainer">
                     <gwa1:DisplayCaptureGeometry.CaptureTypesPlaceholder>
                       <scg:List x:TypeArguments="gwa1:GeometryCaptureType" Capacity="4">
                         <gwa1:GeometryCaptureType>Polyline</gwa1:GeometryCaptureType>
                       </scg:List>
                     </gwa1:DisplayCaptureGeometry.CaptureTypesPlaceholder>
                   </gwa1:DisplayCaptureGeometry>
-                  <gwa1:DisplayCaptureGeometry AutoSubmit="{x:Null}" CaptureTypes="{x:Null}" DefaultCaptureType="{x:Null}" GraphicsLayerName="{x:Null}" x:Key="&quot;Polygon&quot;" DefaultCaptureTypePlaceholder="Polygon" GeometryRequired="True" sap2010:WorkflowViewState.IdRef="DisplayCaptureGeometry_3" InputGeometry="[lastCreatedPolygoneGeometry]" Message="Draw polygons to specify features for cost calculation" RequiredMessage="Draw polygons to determine costs" Result="[lastCreatedPolygoneGeometry]" ShowCapturedGeometry="True" ShowCapturedMessage="True" Title="Cost Estimate" WorkflowContainerName="SpatialCostItemsContainer">
+                  <gwa1:DisplayCaptureGeometry AutoSubmit="{x:Null}" CaptureTypes="{x:Null}" DefaultCaptureType="{x:Null}" GraphicsLayerName="{x:Null}" x:Key="Polygon" DefaultCaptureTypePlaceholder="Polygon" GeometryRequired="True" sap2010:WorkflowViewState.IdRef="DisplayCaptureGeometry_3" Message="Draw polygons to specify features for cost calculation" RequiredMessage="Draw polygons to determine costs" Result="[lastCreatedPolygoneGeometry]" ShowCapturedGeometry="True" ShowCapturedMessage="True" Title="Cost Estimate" WorkflowContainerName="SpatialCostItemsContainer">
                     <gwa1:DisplayCaptureGeometry.CaptureTypesPlaceholder>
                       <scg:List x:TypeArguments="gwa1:GeometryCaptureType" Capacity="4">
                         <gwa1:GeometryCaptureType>Polygon</gwa1:GeometryCaptureType>
@@ -200,7 +205,7 @@
         </Sequence>
       </ActivityAction>
     </ForEach>
-    <sads:DebugSymbol.Symbol>d3dDOlxQcm9ncmFtIEZpbGVzICh4ODYpXExhdGl0dWRlIEdlb2dyYXBoaWNzXEdlb2NvcnRleCBFc3NlbnRpYWxzXERlZmF1bHRcUkVTVCBFbGVtZW50c1xTaXRlc1xXb3JrZmxvd3NcRFJFX1JDRV9QT0MueGFtbEVPA8wBDgIBAVoFWr0CAgFQWwViDgIBTWMFY4ECAgFHZAVk+wECAUFlBcoBDwIBAlqkAlq6AgIBUWAwYD4CAU9dMV1PAgFOY39jmgECAUxj4wFj/gECAUtjWmNwAgFJYzBjTwIBSGR9ZJYBAgFGZN8BZPgBAgFFZFhkbgIBQ2QwZE0CAUJliAFlpwECAUBqCcgBFAIBA24LxwEQAgEEbhlubQIBBXAPnAEaAgE0nwEPxQEaAgEGcRGbASQCATWlARGlAaIBAgEypgERrQEaAgEurgERxAEaAgEHcTJxvR0CAT93F4gBIgIBNqUBT6UBnwECATOrATyrAVcCATGoAT2oAVICAS+uAT+uAVYCAQivARO1ATECASK2ARO8ATECARa9ARPDATECAQp4GX8iAgE8gAEZhwEiAgE3rwHiAq8BmAMCAS2vAdEErwHsBAIBLK8BgwSvAYkEAgErrwGeBK8BpAQCASqvAdEDrwHtAwIBKK8BqwSvAboEAgEnrwGpA68ByQMCASavAe0BrwHzAQIBJa8BvQKvAdkCAgEjtgHoArYBnQMCASG2AdgEtgHzBAIBILYBigS2AZAEAgEftgGlBLYBqwQCAR62AdUDtgH0AwIBHLYBsgS2AcEEAgEbtgGuA7YBzQMCARq2AfABtgH2AQIBGbYBwAK2Ad8CAgEXvQHmAr0BngMCARW9AdwEvQH3BAIBFL0BjgS9AZQEAgETvQGpBL0BrwQCARK9AdkDvQH4AwIBEL0BtgS9AcUEAgEPvQGvA70B0QMCAQ69Ae4BvQH0AQIBDb0BvgK9Ad0CAgELfUR9hgECAT56RXp8AgE9hQFDhQFdAgE6ggFEggFaAgE4</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>d3dDOlxQcm9ncmFtIEZpbGVzICh4ODYpXExhdGl0dWRlIEdlb2dyYXBoaWNzXEdlb2NvcnRleCBFc3NlbnRpYWxzXERlZmF1bHRcUkVTVCBFbGVtZW50c1xTaXRlc1xXb3JrZmxvd3NcRFJFX1JDRV9QT0MueGFtbEZPA9EBDgIBAVoFWr0CAgFQWwViDgIBTWMFY4ECAgFHZAVk+wECAUFlBc8BDwIBAlqkAlq6AgIBUWAwYD4CAU9dMV1PAgFOY39jmgECAUxj4wFj/gECAUtjWmNwAgFJYzBjTwIBSGR9ZJYBAgFGZN8BZPgBAgFFZFhkbgIBQ2QwZE0CAUJliAFlpwECAUBqCc0BFAIBA24LzAEQAgEEbhlubQIBBXAPnAEaAgE0nwEPygEaAgEGcRGbASQCATWlARGsARoCATCtARHJARoCAQdxMnG9HQIBP3cXiAEiAgE2qgE8qgFeAgEzpwE9pwFSAgExrQE/rQFWAgEIsQETugEeAgEiuwETwQExAgEYwgETyAExAgEOrwEVrwF6AgEKeBl/IgIBPIABGYcBIgIBN7IBFbIBmQECAS2zARW5ATMCASO7Aa4CuwHjAgIBIbsBngS7AbkEAgEguwHQA7sB1gMCAR+7AesDuwHxAwIBHrsBmwO7AboDAgEcuwH4A7sBhwQCARu7AfQCuwGTAwIBGrsB5AG7AeoBAgEZwgGsAsIB5AICARfCAaIEwgG9BAIBFsIB1APCAdoDAgEVwgHvA8IB9QMCARTCAZ8DwgG+AwIBEsIB/APCAYsEAgERwgH1AsIBlwMCARDCAeIBwgHoAQIBD68BUK8BZwIBDK8Bbq8BdwIBC31EfYYBAgE+ekV6fAIBPYUBQ4UBXQIBOoIBRIIBWgIBOLIBU7IBlgECAS6zAZ8CswHVAgIBLLMBjgSzAakEAgErswHAA7MBxgMCASqzAdsDswHhAwIBKbMBjgOzAaoDAgEnswHoA7MB9wMCASazAeYCswGGAwIBJbMB1QGzAdsBAgEk</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -210,35 +215,44 @@
       <sap2010:ViewStateData Id="DataTableToDataItemList_2" sap:VirtualizedContainerService.HintSize="925,136" />
       <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="242,60" />
       <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="264,284">
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="200,51">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="DisplayForm_1" sap:VirtualizedContainerService.HintSize="328,794" />
-      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="350,918">
+      <sap2010:ViewStateData Id="DisplayForm_1" sap:VirtualizedContainerService.HintSize="328,561" />
+      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="350,685">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="WriteLine_2" sap:VirtualizedContainerService.HintSize="476,61" />
       <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="476,60" />
+      <sap2010:ViewStateData Id="Alert_2" sap:VirtualizedContainerService.HintSize="212,86" />
+      <sap2010:ViewStateData Id="WriteLine_4" sap:VirtualizedContainerService.HintSize="351,61" />
       <sap2010:ViewStateData Id="DisplayCaptureGeometry_1" sap:VirtualizedContainerService.HintSize="351,562" />
+      <sap2010:ViewStateData Id="Sequence_6" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="DisplayCaptureGeometry_2" sap:VirtualizedContainerService.HintSize="351,562" />
       <sap2010:ViewStateData Id="DisplayCaptureGeometry_3" sap:VirtualizedContainerService.HintSize="351,562" />
-      <sap2010:ViewStateData Id="Switch`1_1" sap:VirtualizedContainerService.HintSize="476,182" />
-      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="498,507">
+      <sap2010:ViewStateData Id="Switch`1_1" sap:VirtualizedContainerService.HintSize="476,790" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="498,1014">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="873,1066">
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="873,1162">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -246,22 +260,22 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="895,1190">
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="895,1286">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ForEach`1_6" sap:VirtualizedContainerService.HintSize="925,1105" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="947,1857">
+      <sap2010:ViewStateData Id="ForEach`1_6" sap:VirtualizedContainerService.HintSize="925,1434" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="947,2186">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ActivityBuilder_1" sap:VirtualizedContainerService.HintSize="349,803" />
+      <sap2010:ViewStateData Id="ActivityBuilder_1" sap:VirtualizedContainerService.HintSize="987,2266" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>
