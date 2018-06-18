@@ -83,7 +83,9 @@
       <Variable x:TypeArguments="sc:IList" Name="convertedCostItems" />
       <Variable x:TypeArguments="scg:IEnumerable(sd:DataRow)" Name="costItemRows" />
       <Variable x:TypeArguments="x:String" Name="variable1" />
-      <Variable x:TypeArguments="scg:IList(gcx:DataItem)" Name="costItemDataList" />
+      <Variable x:TypeArguments="scg:IList(gcx:DataItem)" Name="costItemFeatureTypeDataList" />
+      <Variable x:TypeArguments="scg:IList(gcx:DataItem)" Name="costItemUnitPriceDataList" />
+      <Variable x:TypeArguments="x:Int32" Name="currentCostItemIndex" />
     </Sequence.Variables>
     <gwa1:SqlQuery CommandText="select * from RehabilitationCostItems" ConnectionString="Data Source=AAML0237;Initial Catalog=DRE_RCE_POC;Integrated Security=False;User Id=DRE_RCE; Password=P@ssword1" sap2010:WorkflowViewState.IdRef="SqlQuery_1" ProviderName="System.Data.SqlClient" Results="[costItemsDataTable]" />
     <Assign sap2010:WorkflowViewState.IdRef="Assign_2">
@@ -94,8 +96,9 @@
         <InArgument x:TypeArguments="x:String">CostItemsTable</InArgument>
       </Assign.Value>
     </Assign>
-    <gwa1:DataTableToDataItemList DataItemList="[costItemDataList]" DataTable="[costItemsDataTable]" DisplayColumn="[&quot;FeatureType&quot;]" ValueColumn="[&quot;FeatureType&quot;]" sap2010:WorkflowViewState.IdRef="DataTableToDataItemList_1" />
-    <ForEach x:TypeArguments="gcx:DataItem" DisplayName="ForEach&lt;DataItem&gt;" Values="[costItemDataList]">
+    <gwa1:DataTableToDataItemList DataItemList="[costItemFeatureTypeDataList]" DataTable="[costItemsDataTable]" DisplayColumn="[&quot;FeatureType&quot;]" sap2010:WorkflowViewState.IdRef="DataTableToDataItemList_1" ValueColumn="[&quot;FeatureType&quot;]" />
+    <gwa1:DataTableToDataItemList DataItemList="[costItemUnitPriceDataList]" DataTable="[costItemsDataTable]" DisplayColumn="[&quot;UnitPrice&quot;]" sap2010:WorkflowViewState.IdRef="DataTableToDataItemList_2" ValueColumn="[&quot;UnitPrice&quot;]" />
+    <ForEach x:TypeArguments="gcx:DataItem" DisplayName="ForEach&lt;DataItem&gt;" sap2010:WorkflowViewState.IdRef="ForEach`1_6" Values="[costItemFeatureTypeDataList]">
       <ActivityAction x:TypeArguments="gcx:DataItem">
         <ActivityAction.Argument>
           <DelegateInArgument x:TypeArguments="gcx:DataItem" Name="costItem" />
@@ -113,7 +116,24 @@
                       <ActivityAction.Argument>
                         <DelegateInArgument x:TypeArguments="gcx:FormDefinition" Name="form" />
                       </ActivityAction.Argument>
-                      <Sequence DisplayName="RuntimeModifications" sap2010:WorkflowViewState.IdRef="Sequence_2" />
+                      <Sequence DisplayName="RuntimeModifications" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                        <Assign sap2010:WorkflowViewState.IdRef="Assign_3">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[form.Find(Of TextBoxFormItem)("TextBox2").DefaultText]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">[costItemUnitPriceDataList(currentCostItemIndex).Value.ToString()]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <Assign sap2010:WorkflowViewState.IdRef="Assign_4">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Int32">[currentCostItemIndex]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Int32">[currentCostItemIndex + 1]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </Sequence>
                     </ActivityAction>
                   </gwa1:DisplayForm.Body>
                   <gwa1:DisplayForm.Buttons>
@@ -179,24 +199,26 @@
           </If>
         </Sequence>
       </ActivityAction>
-      <sap2010:WorkflowViewState.IdRef>ForEach`1_6</sap2010:WorkflowViewState.IdRef>
     </ForEach>
-    <sads:DebugSymbol.Symbol>d3dDOlxQcm9ncmFtIEZpbGVzICh4ODYpXExhdGl0dWRlIEdlb2dyYXBoaWNzXEdlb2NvcnRleCBFc3NlbnRpYWxzXERlZmF1bHRcUkVTVCBFbGVtZW50c1xTaXRlc1xXb3JrZmxvd3NcRFJFX1JDRV9QT0MueGFtbDpPA7kBDgIBAVgFWL0CAgFCWQVgDgIBP2EFYfYBAgE5YgW3AQ8CAQJYpAJYugICAUNeMF4+AgFBWzFbTwIBQGF0YY8BAgE+YZwBYbcBAgE9YU9hZQIBO2EwYUQCATpiWmJuAgE4Zwm0ARQCAQNrC7MBEAIBBGsZa20CAQVtD4gBGgIBNIsBD7EBGgIBBm4RhwEkAgE1kQERkQGiAQIBMpIBEZkBGgIBLpoBEbABGgIBB24ybr0dAgE3dBd0cwIBNpEBT5EBnwECATOXATyXAVcCATGUAT2UAVICAS+aAT+aAVYCAQibAROhATECASKiAROoATECARapAROvATECAQqbAeICmwGYAwIBLZsB0QSbAewEAgEsmwGDBJsBiQQCASubAZ4EmwGkBAIBKpsB0QObAe0DAgEomwGrBJsBugQCASebAakDmwHJAwIBJpsB7QGbAfMBAgElmwG9ApsB2QICASOiAegCogGdAwIBIaIB2ASiAfMEAgEgogGKBKIBkAQCAR+iAaUEogGrBAIBHqIB1QOiAfQDAgEcogGyBKIBwQQCARuiAa4DogHNAwIBGqIB8AGiAfYBAgEZogHAAqIB3wICARepAeYCqQGeAwIBFakB3ASpAfcEAgEUqQGOBKkBlAQCAROpAakEqQGvBAIBEqkB2QOpAfgDAgEQqQG2BKkBxQQCAQ+pAa8DqQHRAwIBDqkB7gGpAfQBAgENqQG+AqkB3QICAQs=</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>d3dDOlxQcm9ncmFtIEZpbGVzICh4ODYpXExhdGl0dWRlIEdlb2dyYXBoaWNzXEdlb2NvcnRleCBFc3NlbnRpYWxzXERlZmF1bHRcUkVTVCBFbGVtZW50c1xTaXRlc1xXb3JrZmxvd3NcRFJFX1JDRV9QT0MueGFtbEVPA8wBDgIBAVoFWr0CAgFQWwViDgIBTWMFY4ECAgFHZAVk+wECAUFlBcoBDwIBAlqkAlq6AgIBUWAwYD4CAU9dMV1PAgFOY39jmgECAUxj4wFj/gECAUtjWmNwAgFJYzBjTwIBSGR9ZJYBAgFGZN8BZPgBAgFFZFhkbgIBQ2QwZE0CAUJliAFlpwECAUBqCcgBFAIBA24LxwEQAgEEbhlubQIBBXAPnAEaAgE0nwEPxQEaAgEGcRGbASQCATWlARGlAaIBAgEypgERrQEaAgEurgERxAEaAgEHcTJxvR0CAT93F4gBIgIBNqUBT6UBnwECATOrATyrAVcCATGoAT2oAVICAS+uAT+uAVYCAQivARO1ATECASK2ARO8ATECARa9ARPDATECAQp4GX8iAgE8gAEZhwEiAgE3rwHiAq8BmAMCAS2vAdEErwHsBAIBLK8BgwSvAYkEAgErrwGeBK8BpAQCASqvAdEDrwHtAwIBKK8BqwSvAboEAgEnrwGpA68ByQMCASavAe0BrwHzAQIBJa8BvQKvAdkCAgEjtgHoArYBnQMCASG2AdgEtgHzBAIBILYBigS2AZAEAgEftgGlBLYBqwQCAR62AdUDtgH0AwIBHLYBsgS2AcEEAgEbtgGuA7YBzQMCARq2AfABtgH2AQIBGbYBwAK2Ad8CAgEXvQHmAr0BngMCARW9AdwEvQH3BAIBFL0BjgS9AZQEAgETvQGpBL0BrwQCARK9AdkDvQH4AwIBEL0BtgS9AcUEAgEPvQGvA70B0QMCAQ69Ae4BvQH0AQIBDb0BvgK9Ad0CAgELfUR9hgECAT56RXp8AgE9hQFDhQFdAgE6ggFEggFaAgE4</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
       <sap2010:ViewStateData Id="SqlQuery_1" sap:VirtualizedContainerService.HintSize="925,136" />
       <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="925,60" />
       <sap2010:ViewStateData Id="DataTableToDataItemList_1" sap:VirtualizedContainerService.HintSize="925,136" />
-      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="200,51">
+      <sap2010:ViewStateData Id="DataTableToDataItemList_2" sap:VirtualizedContainerService.HintSize="925,136" />
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="264,284">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="DisplayForm_1" sap:VirtualizedContainerService.HintSize="328,561" />
-      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="350,685">
+      <sap2010:ViewStateData Id="DisplayForm_1" sap:VirtualizedContainerService.HintSize="328,794" />
+      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="350,918">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -216,7 +238,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="873,833">
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="873,1066">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -224,7 +246,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="895,957">
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="895,1190">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -232,7 +254,7 @@
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="ForEach`1_6" sap:VirtualizedContainerService.HintSize="925,1105" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="947,1681">
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="947,1857">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
