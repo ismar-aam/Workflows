@@ -1,0 +1,87 @@
+﻿<Activity mc:Ignorable="sap" x:Class="{x:Null}" sap:VirtualizedContainerService.HintSize="785,2575" mva:VisualBasic.Settings="Assembly references and imported namespaces serialized as XML namespaces" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:eac="clr-namespace:ESRI.ArcGIS.Client;assembly=ESRI.ArcGIS.Client" xmlns:eacg="clr-namespace:ESRI.ArcGIS.Client.Geometry;assembly=ESRI.ArcGIS.Client" xmlns:eact="clr-namespace:ESRI.ArcGIS.Client.Tasks;assembly=ESRI.ArcGIS.Client" xmlns:esri="http://schemas.esri.com/arcgis/client/2009" xmlns:gfc="clr-namespace:Geocortex.Forms.Client;assembly=Geocortex.EssentialsWpfApi" xmlns:gr="clr-namespace:Geocortex.Reporting;assembly=Geocortex.Reporting" xmlns:gwa="clr-namespace:Geocortex.Workflow.Activities;assembly=Geocortex.Workflow" xmlns:gwa1="clr-namespace:Geocortex.Workflow.Activities;assembly=Geocortex.Workflow.Activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=System.Core" xmlns:s1="clr-namespace:System;assembly=System" xmlns:s2="clr-namespace:System;assembly=mscorlib" xmlns:s3="clr-namespace:System;assembly=System.ServiceModel" xmlns:s4="clr-namespace:System;assembly=System.Web.Services" xmlns:sa="clr-namespace:System.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Core" xmlns:scg1="clr-namespace:System.Collections.Generic;assembly=System" xmlns:scg2="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:scg3="clr-namespace:System.Collections.Generic;assembly=System.ServiceModel" xmlns:sl="clr-namespace:System.Linq;assembly=System.Core" xmlns:sw="clr-namespace:System.Windows;assembly=PresentationFramework" xmlns:sw1="clr-namespace:System.Windows;assembly=WindowsBase" xmlns:sw2="clr-namespace:System.Windows;assembly=PresentationCore" xmlns:swt="clr-namespace:System.Windows.Threading;assembly=WindowsBase" xmlns:swt1="clr-namespace:System.Windows.Threading;assembly=System.Windows.Presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Sequence sap:VirtualizedContainerService.HintSize="745,2535" mva:VisualBasic.Settings="Assembly references and imported namespaces serialized as XML namespaces">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Default="https://www.yourdomain.com/ArcGIS/rest/services/[ServiceName]/FeatureServer/[layer]" Name="featureServiceURL" />
+      <Variable x:TypeArguments="x:String" Default="https://www.yourdomain.com/ArcGIS/tokens" Name="tokenServiceURL" />
+      <Variable x:TypeArguments="x:String" Default="username" Name="un" />
+      <Variable x:TypeArguments="x:String" Default="password" Name="pwd" />
+      <Variable x:TypeArguments="x:String" Name="theToken" />
+      <Variable x:TypeArguments="esri:Geometry" Name="theSelectionArea" />
+      <Variable x:TypeArguments="x:String" Default="https://www.yourdomain.com/ArcGIS/rest/services/[ServiceName]/MapServer/[layer]" Name="queryServiceURL" />
+      <Variable x:TypeArguments="esri:FeatureSet" Name="theFeatureSet" />
+      <Variable x:TypeArguments="scg2:IList(x:Int32)" Name="theOIDList" />
+      <Variable x:TypeArguments="scg2:IList(esri:EditResultItem)" Name="theEditResults" />
+      <Variable x:TypeArguments="x:String" Name="MapServiceID" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg2:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg2:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <gwa1:GenerateToken Expiration="10" sap:VirtualizedContainerService.HintSize="723,211" Password="[pwd]" Token="[theToken]" TokenServiceUrl="[tokenServiceURL]" UserName="[un]" />
+    <gwa1:Alert sap:VirtualizedContainerService.HintSize="723,86" Text="Draw a rectangle around the features to delete." Title="Select Features" />
+    <gwa1:CaptureGeometry CaptureType="[Geocortex.Workflow.Activities.GeometryCaptureType.Extent]" sap:VirtualizedContainerService.HintSize="723,86" Result="[theSelectionArea]" />
+    <gwa1:QueryTask Geometry="[theSelectionArea]" sap:VirtualizedContainerService.HintSize="723,243" OutFields="*" QueryServiceUrl="[queryServiceURL]" Results="[theFeatureSet]" SpatialRelationship="esriSpatialRelIntersects" Token="[theToken]" />
+    <gwa1:CommentOut sap:VirtualizedContainerService.HintSize="723,122">
+      <gwa1:Alert sap:VirtualizedContainerService.HintSize="212,86" Text="[theFeatureSet.Count.ToString()]" Title="Debug- make sure query task works" />
+    </gwa1:CommentOut>
+    <If Condition="[theFeatureSet.Features.Count() &gt; 0]" sap:VirtualizedContainerService.HintSize="723,1463">
+      <If.Then>
+        <Sequence DisplayName="GetObjectIDSequence" sap:VirtualizedContainerService.HintSize="486,1357">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="x:Int32" Name="theIntObjectID" />
+            <Variable x:TypeArguments="x:Int32" Name="i" />
+          </Sequence.Variables>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg2:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg2:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <gwa1:CreateList x:TypeArguments="x:Int32" sap:VirtualizedContainerService.HintSize="464,61" Result="[theOIDList]" />
+          <Assign sap:VirtualizedContainerService.HintSize="464,58">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Int32">[i]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Int32">0</InArgument>
+            </Assign.Value>
+          </Assign>
+          <While sap:VirtualizedContainerService.HintSize="464,620" Condition="[i &lt; theFeatureSet.Features.Count()]">
+            <Sequence DisplayName="Add OID to List Sequence" sap:VirtualizedContainerService.HintSize="438,504">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg2:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg2:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <gwa1:Cast x:TypeArguments="x:Int32" sap:VirtualizedContainerService.HintSize="242,58" To="[theIntObjectID]">
+                <gwa1:Cast.Value>
+                  <InArgument x:TypeArguments="x:Object">[theFeatureSet.features(i).Attributes.Item("OBJECTID")]</InArgument>
+                </gwa1:Cast.Value>
+              </gwa1:Cast>
+              <gwa1:CommentOut sap:VirtualizedContainerService.HintSize="242,122">
+                <gwa1:Alert sap:VirtualizedContainerService.HintSize="212,86" Text="[theIntObjectID.toString()]" Title="Debug- check Object ID" />
+              </gwa1:CommentOut>
+              <AddToCollection x:TypeArguments="x:Int32" Collection="[theOIDList]" sap:VirtualizedContainerService.HintSize="242,22" Item="[theIntObjectID]" />
+              <Assign sap:VirtualizedContainerService.HintSize="242,58">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Int32">[i]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Int32">[i + 1]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+          </While>
+          <gwa1:DeleteFeatures FeatureLayerUrl="[featureServiceURL]" sap:VirtualizedContainerService.HintSize="464,111" ObjectIDs="[theOIDList]" Results="[theEditResults]" Token="[theToken]" />
+          <gwa1:CommentOut sap:VirtualizedContainerService.HintSize="464,122">
+            <gwa1:Alert sap:VirtualizedContainerService.HintSize="212,86" Text="[theEditResults(0).ErrorDescription]" Title="Debug- See editing errors" />
+          </gwa1:CommentOut>
+          <gwa1:RefreshMap sap:VirtualizedContainerService.HintSize="464,61" MapServiceId="[MapServiceID]" />
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <gwa1:Alert sap:VirtualizedContainerService.HintSize="212,1357" Text="No features selected." Title="Error" />
+      </If.Else>
+    </If>
+  </Sequence>
+</Activity>

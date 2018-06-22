@@ -1,0 +1,55 @@
+﻿<Activity mc:Ignorable="sap" x:Class="{x:Null}" sap:VirtualizedContainerService.HintSize="374,1210" mva:VisualBasic.Settings="Assembly references and imported namespaces serialized as XML namespaces" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:eac="clr-namespace:ESRI.ArcGIS.Client;assembly=ESRI.ArcGIS.Client" xmlns:eacg="clr-namespace:ESRI.ArcGIS.Client.Geometry;assembly=ESRI.ArcGIS.Client" xmlns:eact="clr-namespace:ESRI.ArcGIS.Client.Tasks;assembly=ESRI.ArcGIS.Client" xmlns:esri="http://schemas.esri.com/arcgis/client/2009" xmlns:gfc="clr-namespace:Geocortex.Forms.Client;assembly=Geocortex.EssentialsWpfApi" xmlns:gr="clr-namespace:Geocortex.Reporting;assembly=Geocortex.Reporting" xmlns:gwa="clr-namespace:Geocortex.Workflow.Activities;assembly=Geocortex.Workflow" xmlns:gwa1="clr-namespace:Geocortex.Workflow.Activities;assembly=Geocortex.Workflow.Activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=System.Core" xmlns:s1="clr-namespace:System;assembly=System" xmlns:s2="clr-namespace:System;assembly=mscorlib" xmlns:s3="clr-namespace:System;assembly=System.ServiceModel" xmlns:s4="clr-namespace:System;assembly=System.Web.Services" xmlns:sa="clr-namespace:System.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Core" xmlns:scg1="clr-namespace:System.Collections.Generic;assembly=System" xmlns:scg2="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:scg3="clr-namespace:System.Collections.Generic;assembly=System.ServiceModel" xmlns:sl="clr-namespace:System.Linq;assembly=System.Core" xmlns:sw="clr-namespace:System.Windows;assembly=PresentationFramework" xmlns:sw1="clr-namespace:System.Windows;assembly=WindowsBase" xmlns:sw2="clr-namespace:System.Windows;assembly=PresentationCore" xmlns:swt="clr-namespace:System.Windows.Threading;assembly=WindowsBase" xmlns:swt1="clr-namespace:System.Windows.Threading;assembly=System.Windows.Presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Sequence sap:VirtualizedContainerService.HintSize="334,1170" mva:VisualBasic.Settings="Assembly references and imported namespaces serialized as XML namespaces">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="esri:Geometry" Name="theFeature" />
+      <Variable x:TypeArguments="esri:MapPoint" Name="theGraphics" />
+      <Variable x:TypeArguments="x:String" Name="theToken" />
+      <Variable x:TypeArguments="scg2:ICollection(esri:Graphic)" Name="theCollection" />
+      <Variable x:TypeArguments="esri:Graphic" Name="theItem" />
+      <Variable x:TypeArguments="x:String" Default="password" Name="pwd" />
+      <Variable x:TypeArguments="x:String" Default="username" Name="un" />
+      <Variable x:TypeArguments="scg2:IEnumerable(esri:Graphic)" Name="theEnumerableCollection" />
+      <Variable x:TypeArguments="scg2:IList(esri:EditResultItem)" Name="theListOfResults" />
+      <Variable x:TypeArguments="x:String" Name="theObjectID" />
+      <Variable x:TypeArguments="scg2:List(esri:Graphic)" Name="theList" />
+      <Variable x:TypeArguments="x:String" Default="https://www.yourdomain.com/ArcGIS/tokens" Name="tokenServiceURL" />
+      <Variable x:TypeArguments="x:String" Default="https://www.yourdomain.com/ArcGIS/rest/services/[AGSServiceName]/FeatureServer/[layer]" Name="featureLayerURL" />
+      <Variable x:TypeArguments="x:String" Default="0" Name="mapServiceID" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg2:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg2:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <gwa1:GenerateToken Expiration="10" sap:VirtualizedContainerService.HintSize="312,211" Password="[pwd]" Token="[theToken]" TokenServiceUrl="[tokenServiceURL]" UserName="[un]" />
+    <gwa1:CaptureGeometry CaptureType="[Geocortex.Workflow.Activities.GeometryCaptureType.MapPoint]" sap:VirtualizedContainerService.HintSize="312,86" Result="[theFeature]" />
+    <Assign sap:VirtualizedContainerService.HintSize="312,58">
+      <Assign.To>
+        <OutArgument x:TypeArguments="esri:Graphic">[theItem]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="esri:Graphic">[new Esri.ArcGIS.Client.Graphic()]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign sap:VirtualizedContainerService.HintSize="312,58">
+      <Assign.To>
+        <OutArgument x:TypeArguments="esri:Geometry">[theItem.geometry]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="esri:Geometry">[theFeature]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <gwa1:CreateCollection x:TypeArguments="esri:Graphic" sap:VirtualizedContainerService.HintSize="312,61" Result="[theCollection]" />
+    <AddToCollection x:TypeArguments="esri:Graphic" Collection="[theCollection]" DisplayName="AddToCollection&lt;Graphic&gt;" sap:VirtualizedContainerService.HintSize="312,22" Item="[theItem]" />
+    <gwa1:AddFeatures FeatureLayerUrl="[featureLayerURL]" Features="[theCollection]" sap:VirtualizedContainerService.HintSize="312,111" Results="[theListOfResults]" Token="[theToken]" />
+    <gwa1:RefreshMap sap:VirtualizedContainerService.HintSize="312,61" MapServiceId="[mapServiceID]" />
+    <Assign sap:VirtualizedContainerService.HintSize="312,58">
+      <Assign.To>
+        <OutArgument x:TypeArguments="scg2:IList(esri:EditResultItem)">[theListOfResults]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="scg2:IList(esri:EditResultItem)">[nothing]</InArgument>
+      </Assign.Value>
+    </Assign>
+  </Sequence>
+</Activity>
