@@ -112,11 +112,10 @@
                     <Variable x:TypeArguments="x:String" Name="txtUnitPriceOut" />
                     <Variable x:TypeArguments="x:String" Name="totalCost" />
                     <Variable x:TypeArguments="x:Double" Name="totalItemCost" />
-                    <Variable x:TypeArguments="x:Double" Name="currentItemId" />
                     <Variable x:TypeArguments="scg:IList(esri:Graphic)" Name="newGraphicList" />
                   </Sequence.Variables>
                   <Sequence sap2010:WorkflowViewState.IdRef="Sequence_12">
-                    <gwa1:DisplayForm ButtonResultValue="[btnClickedDisplayNonSpatial]" ExternalId="formDisplayItemNonSpatial" FormDefinition="&lt;FormDefinition xmlns=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client&quot; xmlns:i=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;&lt;ContainerFormItem xmlns:a=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items&quot;&gt;&lt;a:ArgumentName/&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID&gt;Group1&lt;/a:ItemID&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;/&gt;&lt;a:Description&gt;Item Costs&lt;/a:Description&gt;&lt;a:FormItems&gt;&lt;a:FormItem i:type=&quot;a:TextAreaFormItem&quot;&gt;&lt;a:ArgumentName/&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID&gt;TextArea1&lt;/a:ItemID&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;/&gt;&lt;a:DefaultText/&gt;&lt;a:InputScope&gt;Default&lt;/a:InputScope&gt;&lt;a:Label&gt;&lt;a:ArgumentName/&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID/&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;/&gt;&lt;a:LabelForItemID&gt;TextArea1&lt;/a:LabelForItemID&gt;&lt;a:Text&gt;Activity Name : &lt;/a:Text&gt;&lt;/a:Label&gt;&lt;a:ReadOnly&gt;true&lt;/a:ReadOnly&gt;&lt;a:TextboxWidth&gt;200&lt;/a:TextboxWidth&gt;&lt;a:TextboxHeight&gt;50&lt;/a:TextboxHeight&gt;&lt;/a:FormItem&gt;&lt;a:FormItem i:type=&quot;a:TextBoxFormItem&quot;&gt;&lt;a:ArgumentName&gt;txtUnits&lt;/a:ArgumentName&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID&gt;TextBox1&lt;/a:ItemID&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;&gt;&lt;b:ValidationItem i:type=&quot;b:NumericRangeValidationItem&quot;&gt;&lt;b:Message&gt;Please enter a positive value for number of  units&lt;/b:Message&gt;&lt;b:MaximumValue&gt;100000&lt;/b:MaximumValue&gt;&lt;b:MinimumValue&gt;1&lt;/b:MinimumValue&gt;&lt;/b:ValidationItem&gt;&lt;/a:ValidationItems&gt;&lt;a:DefaultText/&gt;&lt;a:InputScope&gt;Default&lt;/a:InputScope&gt;&lt;a:Label&gt;&lt;a:ArgumentName/&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID/&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;/&gt;&lt;a:LabelForItemID&gt;TextBox1&lt;/a:LabelForItemID&gt;&lt;a:Text&gt;Units :&lt;/a:Text&gt;&lt;/a:Label&gt;&lt;a:ReadOnly&gt;false&lt;/a:ReadOnly&gt;&lt;a:TextboxWidth&gt;200&lt;/a:TextboxWidth&gt;&lt;/a:FormItem&gt;&lt;a:FormItem i:type=&quot;a:TextBoxFormItem&quot;&gt;&lt;a:ArgumentName&gt;txtUnitPrice&lt;/a:ArgumentName&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID&gt;TextBox2&lt;/a:ItemID&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;&gt;&lt;b:ValidationItem i:type=&quot;b:NumericRangeValidationItem&quot;&gt;&lt;b:Message&gt;Please enter a price for each unit&lt;/b:Message&gt;&lt;b:MaximumValue&gt;100000&lt;/b:MaximumValue&gt;&lt;b:MinimumValue&gt;0&lt;/b:MinimumValue&gt;&lt;/b:ValidationItem&gt;&lt;/a:ValidationItems&gt;&lt;a:DefaultText/&gt;&lt;a:InputScope&gt;Default&lt;/a:InputScope&gt;&lt;a:Label&gt;&lt;a:ArgumentName/&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID/&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;/&gt;&lt;a:LabelForItemID&gt;TextBox2&lt;/a:LabelForItemID&gt;&lt;a:Text&gt;Unit Price : $&lt;/a:Text&gt;&lt;/a:Label&gt;&lt;a:ReadOnly&gt;false&lt;/a:ReadOnly&gt;&lt;a:TextboxWidth&gt;200&lt;/a:TextboxWidth&gt;&lt;/a:FormItem&gt;&lt;/a:FormItems&gt;&lt;a:MaxWidth&gt;INF&lt;/a:MaxWidth&gt;&lt;a:Orientation&gt;Vertical&lt;/a:Orientation&gt;&lt;a:VisibleControlID i:nil=&quot;true&quot;/&gt;&lt;a:VisibleControlValue i:nil=&quot;true&quot;/&gt;&lt;/ContainerFormItem&gt;&lt;KnownTypes xmlns:a=&quot;http://schemas.microsoft.com/2003/10/Serialization/Arrays&quot;&gt;&lt;a:string&gt;Geocortex.Forms.Client.Items.ContainerFormItem&lt;/a:string&gt;&lt;a:string&gt;Geocortex.Forms.Client.Items.TextAreaFormItem&lt;/a:string&gt;&lt;a:string&gt;Geocortex.Forms.Client.Items.TextBoxFormItem&lt;/a:string&gt;&lt;a:string&gt;Geocortex.Forms.Client.Items.Validation.NumericRangeValidationItem&lt;/a:string&gt;&lt;/KnownTypes&gt;&lt;MaxHeight&gt;800&lt;/MaxHeight&gt;&lt;MaxWidth&gt;400&lt;/MaxWidth&gt;&lt;Title&gt;Non spatial activity&lt;/Title&gt;&lt;Version&gt;1.1&lt;/Version&gt;&lt;/FormDefinition&gt;" sap2010:WorkflowViewState.IdRef="DisplayForm_1" WorkflowContainerName="Default">
+                    <gwa1:DisplayForm ButtonResultValue="[btnClickedDisplayNonSpatial]" ExternalId="formDisplayItemNonSpatial" FormDefinition="&lt;FormDefinition xmlns=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client&quot; xmlns:i=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;&lt;ContainerFormItem xmlns:a=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items&quot;&gt;&lt;a:ArgumentName/&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID&gt;Group1&lt;/a:ItemID&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;/&gt;&lt;a:Description/&gt;&lt;a:FormItems&gt;&lt;a:FormItem i:type=&quot;a:TextAreaFormItem&quot;&gt;&lt;a:ArgumentName/&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID&gt;TextArea2&lt;/a:ItemID&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;/&gt;&lt;a:DefaultText/&gt;&lt;a:InputScope&gt;Default&lt;/a:InputScope&gt;&lt;a:Label&gt;&lt;a:ArgumentName/&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID/&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;/&gt;&lt;a:LabelForItemID&gt;TextArea2&lt;/a:LabelForItemID&gt;&lt;a:Text&gt;Item ID : &lt;/a:Text&gt;&lt;/a:Label&gt;&lt;a:ReadOnly&gt;true&lt;/a:ReadOnly&gt;&lt;a:TextboxWidth&gt;200&lt;/a:TextboxWidth&gt;&lt;a:TextboxHeight&gt;50&lt;/a:TextboxHeight&gt;&lt;/a:FormItem&gt;&lt;a:FormItem i:type=&quot;a:TextAreaFormItem&quot;&gt;&lt;a:ArgumentName/&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID&gt;TextArea1&lt;/a:ItemID&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;/&gt;&lt;a:DefaultText/&gt;&lt;a:InputScope&gt;Default&lt;/a:InputScope&gt;&lt;a:Label&gt;&lt;a:ArgumentName/&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID/&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;/&gt;&lt;a:LabelForItemID&gt;TextArea1&lt;/a:LabelForItemID&gt;&lt;a:Text&gt;Activity Name : &lt;/a:Text&gt;&lt;/a:Label&gt;&lt;a:ReadOnly&gt;true&lt;/a:ReadOnly&gt;&lt;a:TextboxWidth&gt;200&lt;/a:TextboxWidth&gt;&lt;a:TextboxHeight&gt;50&lt;/a:TextboxHeight&gt;&lt;/a:FormItem&gt;&lt;a:FormItem i:type=&quot;a:TextBoxFormItem&quot;&gt;&lt;a:ArgumentName&gt;txtUnits&lt;/a:ArgumentName&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID&gt;TextBox1&lt;/a:ItemID&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;&gt;&lt;b:ValidationItem i:type=&quot;b:NumericRangeValidationItem&quot;&gt;&lt;b:Message&gt;Please enter a positive value for number of  units&lt;/b:Message&gt;&lt;b:MaximumValue&gt;100000&lt;/b:MaximumValue&gt;&lt;b:MinimumValue&gt;1&lt;/b:MinimumValue&gt;&lt;/b:ValidationItem&gt;&lt;/a:ValidationItems&gt;&lt;a:DefaultText/&gt;&lt;a:InputScope&gt;Default&lt;/a:InputScope&gt;&lt;a:Label&gt;&lt;a:ArgumentName/&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID/&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;/&gt;&lt;a:LabelForItemID&gt;TextBox1&lt;/a:LabelForItemID&gt;&lt;a:Text&gt;Units :&lt;/a:Text&gt;&lt;/a:Label&gt;&lt;a:ReadOnly&gt;false&lt;/a:ReadOnly&gt;&lt;a:TextboxWidth&gt;200&lt;/a:TextboxWidth&gt;&lt;/a:FormItem&gt;&lt;a:FormItem i:type=&quot;a:TextBoxFormItem&quot;&gt;&lt;a:ArgumentName&gt;txtUnitPrice&lt;/a:ArgumentName&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID&gt;TextBox2&lt;/a:ItemID&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;&gt;&lt;b:ValidationItem i:type=&quot;b:NumericRangeValidationItem&quot;&gt;&lt;b:Message&gt;Please enter a price for each unit&lt;/b:Message&gt;&lt;b:MaximumValue&gt;100000&lt;/b:MaximumValue&gt;&lt;b:MinimumValue&gt;0&lt;/b:MinimumValue&gt;&lt;/b:ValidationItem&gt;&lt;/a:ValidationItems&gt;&lt;a:DefaultText/&gt;&lt;a:InputScope&gt;Default&lt;/a:InputScope&gt;&lt;a:Label&gt;&lt;a:ArgumentName/&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID/&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;/&gt;&lt;a:LabelForItemID&gt;TextBox2&lt;/a:LabelForItemID&gt;&lt;a:Text&gt;Unit Price : $&lt;/a:Text&gt;&lt;/a:Label&gt;&lt;a:ReadOnly&gt;false&lt;/a:ReadOnly&gt;&lt;a:TextboxWidth&gt;200&lt;/a:TextboxWidth&gt;&lt;/a:FormItem&gt;&lt;/a:FormItems&gt;&lt;a:MaxWidth&gt;INF&lt;/a:MaxWidth&gt;&lt;a:Orientation&gt;Vertical&lt;/a:Orientation&gt;&lt;a:VisibleControlID i:nil=&quot;true&quot;/&gt;&lt;a:VisibleControlValue i:nil=&quot;true&quot;/&gt;&lt;/ContainerFormItem&gt;&lt;KnownTypes xmlns:a=&quot;http://schemas.microsoft.com/2003/10/Serialization/Arrays&quot;&gt;&lt;a:string&gt;Geocortex.Forms.Client.Items.ContainerFormItem&lt;/a:string&gt;&lt;a:string&gt;Geocortex.Forms.Client.Items.TextAreaFormItem&lt;/a:string&gt;&lt;a:string&gt;Geocortex.Forms.Client.Items.TextBoxFormItem&lt;/a:string&gt;&lt;a:string&gt;Geocortex.Forms.Client.Items.Validation.NumericRangeValidationItem&lt;/a:string&gt;&lt;/KnownTypes&gt;&lt;MaxHeight&gt;800&lt;/MaxHeight&gt;&lt;MaxWidth&gt;400&lt;/MaxWidth&gt;&lt;Title&gt;Cost Item&lt;/Title&gt;&lt;Version&gt;1.1&lt;/Version&gt;&lt;/FormDefinition&gt;" sap2010:WorkflowViewState.IdRef="DisplayForm_1" WorkflowContainerName="Default">
                       <gwa1:DisplayForm.Body>
                         <ActivityAction x:TypeArguments="gcx:FormDefinition">
                           <ActivityAction.Argument>
@@ -128,10 +127,26 @@
                             </Sequence.Variables>
                             <Assign sap2010:WorkflowViewState.IdRef="Assign_3">
                               <Assign.To>
+                                <OutArgument x:TypeArguments="x:String">[form.Find(Of TextAreaFormItem)("TextArea2").DefaultText]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:String">[costItemFeature.Attributes("ItemID").ToString()]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                            <Assign sap2010:WorkflowViewState.IdRef="Assign_55">
+                              <Assign.To>
                                 <OutArgument x:TypeArguments="x:String">[form.Find(Of TextBoxFormItem)("TextBox2").DefaultText]</OutArgument>
                               </Assign.To>
                               <Assign.Value>
                                 <InArgument x:TypeArguments="x:String">[costItemFeature.Attributes("UnitPrice").ToString()]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                            <Assign sap2010:WorkflowViewState.IdRef="Assign_56">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:String">[form.Find(Of TextBoxFormItem)("TextBox1").DefaultText]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:String">[costItemFeature.Attributes("QuantityNonSpatial").ToString()]</InArgument>
                               </Assign.Value>
                             </Assign>
                             <Assign sap2010:WorkflowViewState.IdRef="Assign_7">
@@ -361,7 +376,7 @@
                           </Assign>
                         </If.Else>
                       </If>
-                      <gwa1:RefreshMap MapServiceId="2" sap2010:WorkflowViewState.IdRef="RefreshMap_5" />
+                      <gwa1:RefreshMap sap2010:WorkflowViewState.IdRef="RefreshMap_5" MapServiceId="2" />
                     </Sequence>
                     <Sequence x:Key="Polyline" DisplayName="Polyline Costs" sap2010:WorkflowViewState.IdRef="Sequence_7">
                       <Sequence.Variables>
@@ -629,21 +644,23 @@
     <Sequence sap2010:WorkflowViewState.IdRef="Sequence_15">
       <gwa1:UpdateFeatures FeatureLayerUrl="https://aamags-dev5.aamgeocloud.com/arcgis/rest/services/DRE_DEV/RCE/FeatureServer/3" Features="[costItemsFeatureSet]" sap2010:WorkflowViewState.IdRef="UpdateFeatures_2" Results="[featureEditResult]" />
     </Sequence>
-    <sads:DebugSymbol.Symbol>d3dDOlxQcm9ncmFtIEZpbGVzICh4ODYpXExhdGl0dWRlIEdlb2dyYXBoaWNzXEdlb2NvcnRleCBFc3NlbnRpYWxzXERlZmF1bHRcUkVTVCBFbGVtZW50c1xTaXRlc1xXb3JrZmxvd3NcRFJFX1JDRV9QT0MueGFtbI0CUgP5BA4CAQFaM1o2AgECXQVd/wEDAb4CXgX0BA8CAQj1BAX3BBACAQNdTV1QAwHDAl3AAV3XAQMBwgJd9QFd/AEDAcECXecBXe4BAwHAAl1hXbcBAwG/Al6HAV6nAQMBvQJjCfIEFAIBCfYEB/YE9wECAQRkC+EEFgIBE+IEC+kEFAIBD+oEC/EEFAIBCvYELPYEggECAQf2BIwB9gSjAQIBBvYE3wH2BPQBAgEFaA3gBBICARTnBDbnBEcCARHkBDfkBIMBAgEQ7wQ17wRLAgEN7AQ27ARIAgELaBtouQECARVqEd0BHAMBkQLgARHeBBwCARZ2E8YBHgMBnQLHARPcARgDAZIC6AET7wEcAwGNAvABE/cBHAMBiQL4ARP/ARwDAYUCgAIT3QQcAgEXdxWkASgDAa0CpQEVxQEaAwGeAscBIccBUQMBkwLJARfQASADAZkC0wEX2gEgAwGVAu0BPu0BdAMBkALqAT/qAVQDAY4C9QE+9QF8AwGMAvIBP/IBWwMBigL9AT39AYIBAwGIAvoBPvoBUAMBhgKAAkGAAlgCARiEAhXtAiADAbsB7gIV6AMgAgFs6QMV3AQgAgEeggIXggJ8AgEad48Bd+olAwG8AnexJne6JgMBuwJ3OXdYAwG5ApsBRZsBUgMBtwKgAUWgAVYDAbUCfRuRASYDAa4CpQEjpQFTAwGfAqcBGbMBJAMBqAK2ARnDASQDAaECzgFCzgGEAQMBnALLAUPLAVQDAZoC2AFC2AGBAQMBmALVAUPVAVQDAZYCiwIXkQI1AwH3AZICF+sCHAMBvgHsAhfsAmoDAbwB8wIX+QI1AwGtAfoCF+cDIgIBbeoDF/ADNQIBXvEDF9sEHAIBH4ICUoICaQIBHIICcIICeQIBG4EBHYgBJgMBsgKJAR2QASYDAa8CqwEbsgEkAwGpArcBG8IBIAMBogKLAsoCiwLSAwMBggKLAo4FiwKpBQMBgQKLAq8BiwLDAQMB/wGLArgEiwK+BAMB/gGLAtMEiwLZBAMB/QGLAosEiwKiBAMB+wGLAuAEiwL3BAMB+gGLAuMDiwKDBAMB+QGLAoACiwKGAgMB+AGSAiWSAkoDAb8BlAIb3wImAwHFAeICG+kCJAMBwQHsAjXsAjgDAb0B8wLLAvMC0wMDAbgB8wKOBfMCqQUDAbcB8wKvAfMCxgEDAbUB8wK4BPMCvgQDAbQB8wLTBPMC2QQDAbMB8wKLBPMCogQDAbEB8wLgBPMC9wQDAbAB8wLkA/MCgwQDAa8B8wKBAvMChwIDAa4B/gIZ5gMeAgFu6gPJAuoD0QMCAWnqA5cF6gOyBQIBaOoDrwHqA8UBAgFm6gPBBOoDxwQCAWXqA9wE6gPiBAIBZOoDjATqA6sEAgFi6gPpBOoDgAUCAWHqA+ID6gOEBAIBYOoD/wHqA4UCAgFf8QMl8QNMAgEg8wMbzwQmAgEm0gQb2QQkAgEihgFIhgF8AwG0AoMBSYMBgAEDAbMCjgFIjgGGAQMBsQKLAUmLAYIBAwGwArABRrABiAEDAawCrQFHrQFYAwGqArcBKbcBxwEDAaMCuQEfwAEoAwGkApUCHd4CKAMBxgHnAkbnAqQBAwHEAeQCR+QCWAMBwgH+Aif+Ak8CAW+AAx3aAygCAXXdAx3kAyYCAXH8Ax2DBCYCAVqEBB2LBCYCAVaMBB2TBCYCAVKUBB2bBCYCAU+cBB2jBCYCAUukBB2rBCYCAUesBB2sBKIDAgFBrQQdzQQiAgEpzgQdzgRwAgEn1wRG1wSkAQIBJdQER9QEWAIBI74BSr4BiQEDAacCuwFLuwFcAwGlAp8CH6YCKAMB8gGnAh+uAigDAe4BrwIfrwKlAwMB6AGwAh/dAiQDAccBhwMfjgMoAwGpAY8DH5YDKAMBpQGXAx+eAygDAaEBnwMfpgMoAwGeAacDH64DKAMBmgGvAx+2AygDAZYBtwMftwOkAwMBkAG4Ax/YAyQCAXjZAx/ZA3ICAXbiA0jiA6YBAgF03wNJ3wNaAgFygQRMgQRbAgFd/gNN/gNaAgFbiQRNiQRqAgFYhgROhgRkAgFXkQRUkQTHAQIBVY4EVY4EZgIBU5kEVpkEewIBUZYEV5YEZwIBUKEEVKEEoAECAU6eBFWeBF8CAUypBEipBMUBAgFKpgRJpgRaAgFIrARlrARoAgFGrATYAawE8QECAUWsBI4CrASfAwIBRKwEgQKsBIcCAgFDrAR5rATPAQIBQq0EK60EVwIBKq8EIbkELAIBObwEIcsELAIBK84Eas4EbQIBKKQCUaQClQEDAfUBoQJSoQJsAwHzAawCSqwCuAEDAfEBqQJLqQJcAwHvAa8CZ68CagMB7QGvAtoBrwL0AQMB7AGvApECrwKiAwMB6wGvAoQCrwKKAgMB6gGvAnuvAtEBAwHpAbACLbACWgMByAGyAiO8Ai4DAd8BvwIj2wIuAwHJAYwDTowDXQMBrAGJA0+JA1wDAaoBlANPlANkAwGnAZEDUJEDZgMBpgGcA1acA8kBAwGkAZkDV5kDaAMBogGkA1ikA30DAaABoQNZoQNpAwGfAawDVKwDjAEDAZ0BqQNVqQNiAwGbAbQDSrQDzgEDAZkBsQNLsQNcAwGXAbcDZ7cDagMBlQG3A9oBtwPzAQMBlAG3A5ACtwOhAwMBkwG3A4MCtwOJAgMBkgG3A3u3A9EBAwGRAbgDLbgDWQIBeboDI8QDLgMBiAHHAyPWAy4CAXrZA2zZA28CAXewBCO3BCwCAT64BCO4BJUCAgE6wAQjxwQsAgE2yAQjyASgAQIBNMkEI8kE6wECATDKBCPKBIcCAgEsswIlugIuAwHkAbsCJbsCmAIDAeABwAIlxwIuAwHbAcgCJc8CLgMB1wHQAiXXAi4DAdQB2AIl2AKiAQMB0gHZAiXZAu4BAwHOAdoCJdoCiQIDAcoBuwMlwgMuAwGNAcMDJcMDlwIDAYkBywMl0gMuAwGFAdMDJdMDogEDAYMB1AMl1APtAQIBf9UDJdUDiQICAXu1BFO1BGkCAUCyBFSyBIABAgE/uARIuASeAQIBPbgEqAG4BMEBAgE8uAT9AbgEkgICATvFBE7FBKkBAgE4wgRPwgRwAgE3yASLAcgEnQECATXJBF7JBHACATPJBNkByQToAQIBMcoERcoEmwECAS/KBKUBygS3AQIBLsoE8AHKBIQCAgEtuAJVuAJqAwHmAbUCVrUCgwEDAeUBuwJKuwKgAQMB4wG7AqoBuwLEAQMB4gG7AoACuwKVAgMB4QHFAlTFAmMDAd4BwgJVwgJjAwHcAc0CVc0CagMB2QHKAlbKAm0DAdgB1QJQ1QKrAQMB1gHSAlHSAnMDAdUB2AKNAdgCnwEDAdMB2QJg2QJyAwHRAdkC2wHZAusBAwHPAdoCR9oCnQEDAc0B2gKnAdoCuQEDAcwB2gLyAdoChgIDAcsBwANVwANrAwGPAb0DVr0DggEDAY4BwwNKwwOgAQMBjAHDA6oBwwPDAQMBiwHDA/8BwwOUAgMBigHQA1DQA6sBAwGHAc0DUc0DcgMBhgHTA40B0wOfAQMBhAHUA2DUA3IDAYIB1APbAdQD6gEDAYAB1QNH1QOdAQIBftUDpwHVA7kBAgF91QPyAdUDhgICAXw=</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>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</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
-      <sap2010:ViewStateData Id="QueryTask_1" sap:VirtualizedContainerService.HintSize="338,251" />
+      <sap2010:ViewStateData Id="QueryTask_1" sap:VirtualizedContainerService.HintSize="337,243" />
       <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_55" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_56" sap:VirtualizedContainerService.HintSize="242,60" />
       <sap2010:ViewStateData Id="Assign_7" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="264,284">
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="200,51">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="DisplayForm_1" sap:VirtualizedContainerService.HintSize="200,52">
+      <sap2010:ViewStateData Id="DisplayForm_1" sap:VirtualizedContainerService.HintSize="355,654">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -668,7 +685,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="If_3" sap:VirtualizedContainerService.HintSize="775,484">
+      <sap2010:ViewStateData Id="If_3" sap:VirtualizedContainerService.HintSize="200,51">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -676,7 +693,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_12" sap:VirtualizedContainerService.HintSize="509,52">
+      <sap2010:ViewStateData Id="Sequence_12" sap:VirtualizedContainerService.HintSize="222,266">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -686,17 +703,17 @@
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="Assign_22" sap:VirtualizedContainerService.HintSize="242,60" />
       <sap2010:ViewStateData Id="Assign_46" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="If_9" sap:VirtualizedContainerService.HintSize="509,210" />
-      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="531,426">
+      <sap2010:ViewStateData Id="If_9" sap:VirtualizedContainerService.HintSize="509,208" />
+      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="531,423">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="477,60" />
-      <sap2010:ViewStateData Id="Assign_12" sap:VirtualizedContainerService.HintSize="477,60" />
-      <sap2010:ViewStateData Id="Assign_13" sap:VirtualizedContainerService.HintSize="477,60" />
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="476,60" />
+      <sap2010:ViewStateData Id="Assign_12" sap:VirtualizedContainerService.HintSize="476,60" />
+      <sap2010:ViewStateData Id="Assign_13" sap:VirtualizedContainerService.HintSize="476,60" />
       <sap2010:ViewStateData Id="Alert_2" sap:VirtualizedContainerService.HintSize="212,86" />
       <sap2010:ViewStateData Id="DisplayCaptureGeometry_1" sap:VirtualizedContainerService.HintSize="489,584" />
       <sap2010:ViewStateData Id="Assign_9" sap:VirtualizedContainerService.HintSize="695,60" />
@@ -743,7 +760,7 @@
       <sap2010:ViewStateData Id="Assign_29" sap:VirtualizedContainerService.HintSize="242,60" />
       <sap2010:ViewStateData Id="If_5" sap:VirtualizedContainerService.HintSize="489,326" />
       <sap2010:ViewStateData Id="RefreshMap_5" sap:VirtualizedContainerService.HintSize="489,62" />
-      <sap2010:ViewStateData Id="Sequence_6" sap:VirtualizedContainerService.HintSize="511,1176">
+      <sap2010:ViewStateData Id="Sequence_6" sap:VirtualizedContainerService.HintSize="511,51">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -751,7 +768,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="DisplayCaptureGeometry_2" sap:VirtualizedContainerService.HintSize="1006,584" />
+      <sap2010:ViewStateData Id="DisplayCaptureGeometry_2" sap:VirtualizedContainerService.HintSize="1006,562" />
       <sap2010:ViewStateData Id="Assign_31" sap:VirtualizedContainerService.HintSize="695,60" />
       <sap2010:ViewStateData Id="Assign_32" sap:VirtualizedContainerService.HintSize="695,60" />
       <sap2010:ViewStateData Id="Assign_33" sap:VirtualizedContainerService.HintSize="695,60" />
@@ -798,14 +815,14 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_7" sap:VirtualizedContainerService.HintSize="1028,1082">
+      <sap2010:ViewStateData Id="Sequence_7" sap:VirtualizedContainerService.HintSize="1028,1060">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="DisplayCaptureGeometry_3" sap:VirtualizedContainerService.HintSize="984,584" />
+      <sap2010:ViewStateData Id="DisplayCaptureGeometry_3" sap:VirtualizedContainerService.HintSize="984,562" />
       <sap2010:ViewStateData Id="Assign_37" sap:VirtualizedContainerService.HintSize="695,60" />
       <sap2010:ViewStateData Id="Assign_38" sap:VirtualizedContainerService.HintSize="695,60" />
       <sap2010:ViewStateData Id="Assign_39" sap:VirtualizedContainerService.HintSize="695,60" />
@@ -844,22 +861,22 @@
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="Assign_43" sap:VirtualizedContainerService.HintSize="242,60" />
       <sap2010:ViewStateData Id="If_7" sap:VirtualizedContainerService.HintSize="984,1919" />
-      <sap2010:ViewStateData Id="Sequence_16" sap:VirtualizedContainerService.HintSize="1006,2667">
+      <sap2010:ViewStateData Id="Sequence_16" sap:VirtualizedContainerService.HintSize="1006,2645">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Switch`1_1" sap:VirtualizedContainerService.HintSize="477,293" />
-      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="499,717">
+      <sap2010:ViewStateData Id="Switch`1_1" sap:VirtualizedContainerService.HintSize="476,182" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="498,606">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="1055,867">
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="1054,754">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -867,7 +884,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="242,176">
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="242,175">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -876,30 +893,30 @@
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="Assign_27" sap:VirtualizedContainerService.HintSize="242,60" />
       <sap2010:ViewStateData Id="Assign_28" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Sequence_14" sap:VirtualizedContainerService.HintSize="264,500">
+      <sap2010:ViewStateData Id="Sequence_14" sap:VirtualizedContainerService.HintSize="264,499">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ForEach`1_7" sap:VirtualizedContainerService.HintSize="294,649" />
-      <sap2010:ViewStateData Id="UpdateFeatures_2" sap:VirtualizedContainerService.HintSize="313,114" />
-      <sap2010:ViewStateData Id="Sequence_15" sap:VirtualizedContainerService.HintSize="338,238">
+      <sap2010:ViewStateData Id="ForEach`1_7" sap:VirtualizedContainerService.HintSize="337,647" />
+      <sap2010:ViewStateData Id="UpdateFeatures_2" sap:VirtualizedContainerService.HintSize="312,111" />
+      <sap2010:ViewStateData Id="Sequence_15" sap:VirtualizedContainerService.HintSize="337,235">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="360,1342">
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="359,1329">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ActivityBuilder_1" sap:VirtualizedContainerService.HintSize="400,1422" />
+      <sap2010:ViewStateData Id="ActivityBuilder_1" sap:VirtualizedContainerService.HintSize="399,1409" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>
