@@ -89,6 +89,7 @@
       <Variable x:TypeArguments="esri:FeatureSet" Name="currentItemFeatureSet" />
       <Variable x:TypeArguments="x:Int32" Default="0" Name="currentItemIndex" />
       <Variable x:TypeArguments="scg:IList(esri:EditResultItem)" Name="featureAddResult" />
+      <Variable x:TypeArguments="x:Double" Name="currentQuantityNonSpatial" />
     </Sequence.Variables>
     <gwa1:QueryTask sap2010:WorkflowViewState.IdRef="QueryTask_1" OutFields="*" QueryServiceUrl="https://aamags-dev5.aamgeocloud.com/arcgis/rest/services/DRE_DEV/RCE/FeatureServer/3" Results="[costItemsFeatureSet]" ReturnGeometry="False" Where="1 = 1" />
     <ForEach x:TypeArguments="esri:Graphic" DisplayName="ForEach&lt;Graphic&gt;" sap2010:WorkflowViewState.IdRef="ForEach`1_7" Values="[costItemsFeatureSet.features]">
@@ -213,24 +214,44 @@
                   </Sequence>
                   <If Condition="[btnClickedDisplayNonSpatial = &quot;OK&quot;]" sap2010:WorkflowViewState.IdRef="If_9">
                     <If.Then>
-                      <Assign sap2010:WorkflowViewState.IdRef="Assign_22">
-                        <Assign.To>
-                          <OutArgument x:TypeArguments="x:Double">[currentItemCost]</OutArgument>
-                        </Assign.To>
-                        <Assign.Value>
-                          <InArgument x:TypeArguments="x:Double">[Convert.ToInt32(txtUnitsOut) * Convert.ToDouble(txtUnitPriceOut)]</InArgument>
-                        </Assign.Value>
-                      </Assign>
+                      <Sequence sap2010:WorkflowViewState.IdRef="Sequence_30">
+                        <Assign sap2010:WorkflowViewState.IdRef="Assign_22">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Double">[currentItemCost]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Double">[Convert.ToInt32(txtUnitsOut) * Convert.ToDouble(txtUnitPriceOut)]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <Assign sap2010:WorkflowViewState.IdRef="Assign_59">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Double">[currentQuantityNonSpatial]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Double">[Convert.ToInt32(txtUnitsOut)]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </Sequence>
                     </If.Then>
                     <If.Else>
-                      <Assign sap2010:WorkflowViewState.IdRef="Assign_46">
-                        <Assign.To>
-                          <OutArgument x:TypeArguments="x:Double">[currentItemCost]</OutArgument>
-                        </Assign.To>
-                        <Assign.Value>
-                          <InArgument x:TypeArguments="x:Double">[Convert.ToDouble(costItemFeature.Attributes("TotalItemCost"))]</InArgument>
-                        </Assign.Value>
-                      </Assign>
+                      <Sequence sap2010:WorkflowViewState.IdRef="Sequence_29">
+                        <Assign sap2010:WorkflowViewState.IdRef="Assign_46">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Double">[currentItemCost]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Double">[Convert.ToDouble(costItemFeature.Attributes("TotalItemCost"))]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <Assign sap2010:WorkflowViewState.IdRef="Assign_58">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Double">[currentQuantityNonSpatial]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Double">[Convert.ToInt32(costItemFeature.Attributes("QuantityNonSpatial"))]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </Sequence>
                     </If.Else>
                   </If>
                 </Sequence>
@@ -267,6 +288,15 @@
                     <Assign.Value>
                       <InArgument x:TypeArguments="x:Int32">[Convert.ToInt32(costItemFeature.Attributes("UnitPrice").ToString())]</InArgument>
                     </Assign.Value>
+                  </Assign>
+                  <Assign>
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Double">[currentQuantityNonSpatial]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:Double">[Convert.ToInt32(costItemFeature.Attributes("QuantityNonSpatial"))]</InArgument>
+                    </Assign.Value>
+                    <sap2010:WorkflowViewState.IdRef>Assign_60</sap2010:WorkflowViewState.IdRef>
                   </Assign>
                   <Switch x:TypeArguments="x:String" Expression="[currentCostItemType]" sap2010:WorkflowViewState.IdRef="Switch`1_1">
                     <Switch.Default>
@@ -630,6 +660,14 @@
               <InArgument x:TypeArguments="x:Object">[currentItemCost]</InArgument>
             </Assign.Value>
           </Assign>
+          <Assign sap2010:WorkflowViewState.IdRef="Assign_57">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Object">[costItemsFeatureSet.features(currentItemIndex).Attributes("QuantityNonSpatial")]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Object">[currentQuantityNonSpatial]</InArgument>
+            </Assign.Value>
+          </Assign>
           <Assign sap2010:WorkflowViewState.IdRef="Assign_28">
             <Assign.To>
               <OutArgument x:TypeArguments="x:Int32">[currentItemIndex]</OutArgument>
@@ -644,7 +682,7 @@
     <Sequence sap2010:WorkflowViewState.IdRef="Sequence_15">
       <gwa1:UpdateFeatures FeatureLayerUrl="https://aamags-dev5.aamgeocloud.com/arcgis/rest/services/DRE_DEV/RCE/FeatureServer/3" Features="[costItemsFeatureSet]" sap2010:WorkflowViewState.IdRef="UpdateFeatures_2" Results="[featureEditResult]" />
     </Sequence>
-    <sads:DebugSymbol.Symbol>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</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>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</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -693,7 +731,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_12" sap:VirtualizedContainerService.HintSize="222,266">
+      <sap2010:ViewStateData Id="Sequence_12" sap:VirtualizedContainerService.HintSize="553,51">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -702,9 +740,25 @@
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="Assign_22" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_59" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_30" sap:VirtualizedContainerService.HintSize="264,284">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="Assign_46" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="If_9" sap:VirtualizedContainerService.HintSize="509,208" />
-      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="531,423">
+      <sap2010:ViewStateData Id="Assign_58" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_29" sap:VirtualizedContainerService.HintSize="264,284">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_9" sap:VirtualizedContainerService.HintSize="553,432" />
+      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="575,647">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -714,6 +768,7 @@
       <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="476,60" />
       <sap2010:ViewStateData Id="Assign_12" sap:VirtualizedContainerService.HintSize="476,60" />
       <sap2010:ViewStateData Id="Assign_13" sap:VirtualizedContainerService.HintSize="476,60" />
+      <sap2010:ViewStateData Id="Assign_60" sap:VirtualizedContainerService.HintSize="476,60" />
       <sap2010:ViewStateData Id="Alert_2" sap:VirtualizedContainerService.HintSize="212,86" />
       <sap2010:ViewStateData Id="DisplayCaptureGeometry_1" sap:VirtualizedContainerService.HintSize="489,584" />
       <sap2010:ViewStateData Id="Assign_9" sap:VirtualizedContainerService.HintSize="695,60" />
@@ -869,14 +924,14 @@
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="Switch`1_1" sap:VirtualizedContainerService.HintSize="476,182" />
-      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="498,606">
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="498,706">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="1054,754">
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="1098,854">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -892,15 +947,16 @@
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="Assign_27" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_57" sap:VirtualizedContainerService.HintSize="242,60" />
       <sap2010:ViewStateData Id="Assign_28" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Sequence_14" sap:VirtualizedContainerService.HintSize="264,499">
+      <sap2010:ViewStateData Id="Sequence_14" sap:VirtualizedContainerService.HintSize="264,599">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ForEach`1_7" sap:VirtualizedContainerService.HintSize="337,647" />
+      <sap2010:ViewStateData Id="ForEach`1_7" sap:VirtualizedContainerService.HintSize="337,747" />
       <sap2010:ViewStateData Id="UpdateFeatures_2" sap:VirtualizedContainerService.HintSize="312,111" />
       <sap2010:ViewStateData Id="Sequence_15" sap:VirtualizedContainerService.HintSize="337,235">
         <sap:WorkflowViewStateService.ViewState>
@@ -909,14 +965,14 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="359,1329">
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="359,1429">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ActivityBuilder_1" sap:VirtualizedContainerService.HintSize="399,1409" />
+      <sap2010:ViewStateData Id="ActivityBuilder_1" sap:VirtualizedContainerService.HintSize="399,1509" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>
