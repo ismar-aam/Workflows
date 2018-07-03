@@ -1,4 +1,4 @@
-﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="ActivityBuilder" mva:VisualBasic.Settings="{x:Null}" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1"
+﻿<Activity mc:Ignorable="sads sap sap2010" x:Class="ActivityBuilder" mva:VisualBasic.Settings="{x:Null}" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1"
  xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
  xmlns:eac="clr-namespace:ESRI.ArcGIS.Client;assembly=ESRI.ArcGIS.Client"
  xmlns:eacg="clr-namespace:ESRI.ArcGIS.Client.Geometry;assembly=ESRI.ArcGIS.Client"
@@ -74,6 +74,11 @@
       <Variable x:TypeArguments="esri:FeatureSet" Name="updatedItemsFeatureSet" />
       <Variable x:TypeArguments="scg:IList(esri:EditResultItem)" Name="featureEditResult" />
     </Sequence.Variables>
+    <gwa1:CSharpScript sap2010:WorkflowViewState.IdRef="CSharpScript_1" Script="updatedFeatures = new FeatureSet();">
+      <gwa1:CSharpScript.Parameters>
+        <InOutArgument x:TypeArguments="esri:FeatureSet" x:Key="updatedFeatures">[updatedItemsFeatureSet]</InOutArgument>
+      </gwa1:CSharpScript.Parameters>
+    </gwa1:CSharpScript>
     <gwa1:QueryTask sap2010:WorkflowViewState.IdRef="QueryTask_1" OutFields="*" QueryServiceUrl="https://aamags-dev5.aamgeocloud.com/arcgis/rest/services/DRE_DEV/RCE/FeatureServer/3" Results="[costItemsFeatureSet]" ReturnGeometry="False" Where="1 = 1" />
     <ForEach x:TypeArguments="esri:Graphic" DisplayName="ForEach&lt;Graphic&gt;" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[costItemsFeatureSet.Features]">
       <ActivityAction x:TypeArguments="esri:Graphic">
@@ -93,14 +98,6 @@
               <InArgument x:TypeArguments="x:Object">[123.45]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign sap2010:WorkflowViewState.IdRef="Assign_4">
-            <Assign.To>
-              <OutArgument x:TypeArguments="scg:IDictionary(x:String, x:Object)">[updatedItemsFeatureSet.Features(0).Attributes]</OutArgument>
-            </Assign.To>
-            <Assign.Value>
-              <InArgument x:TypeArguments="scg:IDictionary(x:String, x:Object)">[item.Attributes]</InArgument>
-            </Assign.Value>
-          </Assign>
           <Assign sap2010:WorkflowViewState.IdRef="Assign_2">
             <Assign.To>
               <OutArgument x:TypeArguments="x:Int32">[currentFeatureIndex]</OutArgument>
@@ -113,31 +110,31 @@
       </ActivityAction>
     </ForEach>
     <gwa1:UpdateFeatures FeatureLayerUrl="https://aamags-dev5.aamgeocloud.com/arcgis/rest/services/DRE_DEV/RCE/FeatureServer/3" Features="[updatedItemsFeatureSet]" sap2010:WorkflowViewState.IdRef="UpdateFeatures_1" Results="[featureEditResult]" />
-    <sads:DebugSymbol.Symbol>d4EBQzpcUHJvZ3JhbSBGaWxlcyAoeDg2KVxMYXRpdHVkZSBHZW9ncmFwaGljc1xHZW9jb3J0ZXggRXNzZW50aWFsc1xEZWZhdWx0XFJFU1QgRWxlbWVudHNcU2l0ZXNcV29ya2Zsb3dzXFVwZGF0ZUZlYXR1cmVzRm9yTG9vcC54YW1sGEcDdQ4CAQFNBU3/AQIBFU4Fcg8CAQZzBXP4AQIBAk1NTVACARpNwAFN1wECARlN9QFN/AECARhN5wFN7gECARdNYU23AQIBFk6HAU6nAQIBFFMJcBQCAQdzKnOAAQIBBXOKAXOkAQIBBHPgAXP1AQIBA1U5VTwCAQhYC18UAgERYAtnFAIBDmgLbxQCAQldNl0+AgETWjdaWQIBEmVRZWICARBiUmKBAQIBD201bU4CAQxqNmpLAgEK</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>d4EBQzpcUHJvZ3JhbSBGaWxlcyAoeDg2KVxMYXRpdHVkZSBHZW9ncmFwaGljc1xHZW9jb3J0ZXggRXNzZW50aWFsc1xEZWZhdWx0XFJFU1QgRWxlbWVudHNcU2l0ZXNcV29ya2Zsb3dzXFVwZGF0ZUZlYXR1cmVzRm9yTG9vcC54YW1sF0cDcg4CAQFNBVEZAgEYUgVS/wECARJTBW8PAgEGcAVw+AECAQJPUk9qAgEZUk1SUAIBF1LAAVLXAQIBFlL1AVL8AQIBFVLnAVLuAQIBFFJhUrcBAgETU4cBU6cBAgERWAltFAIBB3AqcIABAgEFcIoBcKQBAgEEcOABcPUBAgEDWjlaPAIBCF0LZBQCAQ5lC2wUAgEJYjZiPgIBEF83X1kCAQ9qNWpOAgEMZzZnSwIBCg==</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="CSharpScript_1" sap:VirtualizedContainerService.HintSize="337,86" />
       <sap2010:ViewStateData Id="QueryTask_1" sap:VirtualizedContainerService.HintSize="337,243" />
       <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="242,60" />
       <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="264,384">
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="264,284">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ForEach`1_1" sap:VirtualizedContainerService.HintSize="337,532" />
+      <sap2010:ViewStateData Id="ForEach`1_1" sap:VirtualizedContainerService.HintSize="337,432" />
       <sap2010:ViewStateData Id="UpdateFeatures_1" sap:VirtualizedContainerService.HintSize="337,111" />
-      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="359,1090">
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="359,1116">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ActivityBuilder_1" sap:VirtualizedContainerService.HintSize="399,1170" />
+      <sap2010:ViewStateData Id="ActivityBuilder_1" sap:VirtualizedContainerService.HintSize="399,1196" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>
